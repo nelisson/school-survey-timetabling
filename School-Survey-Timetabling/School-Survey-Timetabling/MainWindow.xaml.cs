@@ -1,4 +1,7 @@
-﻿namespace School_Survey_Timetabling
+﻿using System.Collections.Generic;
+using System.Linq;
+
+namespace School_Survey_Timetabling
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml
@@ -10,6 +13,12 @@
             InitializeComponent();
 
             // Insert code required on object creation below this point.
+            var teste = new Dictionary<string, Dictionary<string, Dictionary<string, string>>>();
+
+            foreach (var t in teste)
+            {
+                   
+            }
         }
     }
 }
