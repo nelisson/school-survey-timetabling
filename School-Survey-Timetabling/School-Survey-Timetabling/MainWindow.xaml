@@ -45,7 +45,7 @@
                                         <DoubleAnimation 
                                             Storyboard.TargetName="trans"
                                             Storyboard.TargetProperty="(ScaleTransform.ScaleX)"
-                                            From="1.0" To="1.1" Duration="0:0:0.05" RepeatBehavior="">
+                                            From="1.0" To="1.1" Duration="0:0:0.05">
                                         </DoubleAnimation>
                                     </Storyboard>
                                 </BeginStoryboard>
