@@ -1,17 +1,19 @@
-﻿<ribbon:RibbonWindow x:Class="School_Survey_Timetabling.MainWindow"
+﻿
+    
+    <ribbon:RibbonWindow x:Class="School_Survey_Timetabling.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:ribbon="clr-namespace:Microsoft.Windows.Controls.Ribbon;assembly=RibbonControlsLibrary"
         Title="MainWindow"
 		x:Name="RibbonWindow"
 		Width="640" Height="480">
-
-	<Grid x:Name="LayoutRoot">
+    
+        <Grid x:Name="LayoutRoot">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-
+        
         <ribbon:Ribbon x:Name="Ribbon">
             <ribbon:Ribbon.ApplicationMenu>
                 <ribbon:RibbonApplicationMenu SmallImageSource="Images\SmallIcon.png">
@@ -28,9 +30,39 @@
                                          LargeImageSource="Images\LargeIcon.png"
                                          Label="Button1" />
 
+                    
                     <ribbon:RibbonButton x:Name="Button2"
                                          SmallImageSource="Images\SmallIcon.png"
-                                         Label="Button2" />
+                                         Label="Button2"
+                                         RenderTransformOrigin="0.5,0.5" MouseEnter="Button2_MouseEnter">
+                        <ribbon:RibbonButton.RenderTransform>
+                            <ScaleTransform x:Name="trans" CenterX="{Binding ElementName=trans}" ScaleY="{Binding RelativeSource={RelativeSource Self}, Path=ScaleX}"></ScaleTransform>
+                        </ribbon:RibbonButton.RenderTransform>
+                        <ribbon:RibbonButton.Triggers>
+                            <EventTrigger RoutedEvent="ribbon:RibbonButton.MouseEnter">
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <DoubleAnimation 
+                                            Storyboard.TargetName="trans"
+                                            Storyboard.TargetProperty="(ScaleTransform.ScaleX)"
+                                            From="1.0" To="1.1" Duration="0:0:0.05" RepeatBehavior="">
+                                        </DoubleAnimation>
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </EventTrigger>
+                            <EventTrigger RoutedEvent="ribbon:RibbonButton.MouseLeave">
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <DoubleAnimation 
+                                            Storyboard.TargetName="trans"
+                                            Storyboard.TargetProperty="(ScaleTransform.ScaleX)"
+                                            From="1.1" To="1.0" Duration="0:0:0.05">
+                                        </DoubleAnimation>
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </EventTrigger>
+                        </ribbon:RibbonButton.Triggers>
+                    </ribbon:RibbonButton>
                     <ribbon:RibbonButton x:Name="Button3"
                                          SmallImageSource="Images\SmallIcon.png"
                                          Label="Button3" />
