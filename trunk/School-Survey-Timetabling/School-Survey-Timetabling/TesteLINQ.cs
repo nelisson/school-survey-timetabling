@@ -9,11 +9,21 @@ using System.Globalization;
 
 namespace School_Survey_Timetabling
 {
+    /// <summary>
+    /// Classe locona.
+    /// </summary>
     [Table(Name = "TabelaTeste")]
     public class TesteLINQ
     {
+        /// <summary>
+        /// ID? Oo
+        /// </summary>
         [ContractVerification(false)]
         public int ID { get; set; }
+
+        /// <summary>
+        /// Teste ftw.
+        /// </summary>
         public float Teste { get; set; }
 
         [ContractInvariantMethod]
@@ -23,6 +33,11 @@ namespace School_Survey_Timetabling
             Contract.Invariant(Teste >= 0);
         }
 
+        /// <summary>
+        /// Super metodo m.
+        /// </summary>
+        /// <param name="s">wowzers</param>
+        /// <returns>nro aleatorio ftw</returns>
         public int M(string s)
         {
             Contract.Requires<ArgumentNullException>(s != null, "s nao pode ser null omg.");
@@ -33,9 +48,12 @@ namespace School_Survey_Timetabling
             return -5;
         }
 
+        /// <summary>
+        /// chama m o/
+        /// </summary>
         public void M2()
         {
-            var x = M(null);
+            var x = M("");
         }
     }
 }
