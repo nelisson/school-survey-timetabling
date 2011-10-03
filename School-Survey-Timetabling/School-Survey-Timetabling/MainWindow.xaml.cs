@@ -1,6 +1,7 @@
 ﻿using System.Windows.Media;
 using System.Diagnostics.Contracts;
 using System.Collections.Generic;
+using School_Survey_Timetabling.Model;
 
 namespace School_Survey_Timetabling
 {
@@ -24,23 +25,16 @@ namespace School_Survey_Timetabling
 
             Trans = new ScaleTransform(1.2, 1.2);
             Resources.Add("teste", Trans);
-
-            var x = new TesteLINQ();
-            x.M(null);
-            var teste = new Dictionary<string, Dictionary<string, Dictionary<string, List<Dictionary<List<int>, object>>>>>();
-            
-            // Insert code required on object creation below this point.
-            var ttt = teste.ToString();
-
-            foreach (var t in teste)
-            {
-                   
-            }
         }
 
         private void Button2_MouseEnter(object sender, System.Windows.Input.MouseEventArgs e)
         {
 
+        }
+
+        private void Buttonf_Click(object sender, System.Windows.RoutedEventArgs e)
+        {
+            var escola = new EmefFatima();
         }
     }
 }

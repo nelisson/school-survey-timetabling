@@ -48,7 +48,7 @@
                                     Header="Group1" SnapsToDevicePixels="True">
 
                     <ribbon:RibbonButton x:Name="Buttonf"
-                                         LargeImageSource="Images\LargeIcon.png" />
+                                         LargeImageSource="Images\LargeIcon.png" Click="Buttonf_Click" />
 
                     <ribbon:RibbonButton x:Name="Button2"
                                          SmallImageSource="Images\SmallIcon.png" />
