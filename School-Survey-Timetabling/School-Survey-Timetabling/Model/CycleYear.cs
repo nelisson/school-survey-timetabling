@@ -1,7 +1,7 @@
 ﻿using System;
 using System.ComponentModel;
+using System.Data.Linq;
 using System.Data.Linq.Mapping;
-using System.Diagnostics.Contracts;
 using Extensions;
 
 namespace School_Survey_Timetabling.Model
@@ -25,6 +25,7 @@ namespace School_Survey_Timetabling.Model
         Kindergarten,
     }
 
+    [Table(Name = "AnoCiclos")]
     class CycleYear
     {
         [Column(IsDbGenerated = true, IsPrimaryKey = true)]
@@ -51,5 +52,15 @@ namespace School_Survey_Timetabling.Model
             return String.Format(ClassType == ClassType.Progression ? "{1}{0}{2}" : "{0}{1}{2}",
                                  ClassType.GetDescriptionOrDefault(), CycleCode.GetDescriptionOrDefault(), Year);
         }
+
+        private EntityRef<Class> _class;
+        
+        public Class Class
+        {
+            get { return _class.Entity; }
+            set { _class.Entity = value; }
+        }
+        
+
     }
 }

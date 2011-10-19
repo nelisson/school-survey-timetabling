@@ -1,7 +1,9 @@
-﻿using System.Windows.Media;
+﻿using System;
 using System.Diagnostics.Contracts;
-using System.Collections.Generic;
+using System.Linq;
+using System.Windows.Media;
 using School_Survey_Timetabling.Model;
+
 
 namespace School_Survey_Timetabling
 {
@@ -35,6 +37,28 @@ namespace School_Survey_Timetabling
         private void Buttonf_Click(object sender, System.Windows.RoutedEventArgs e)
         {
             var escola = new EmefFatima();
+            var teacher = new Teacher {Name="Manolo", Workload = TimeSpan.FromHours(40)};
+            var disc = new Discipline {Name="Math", Teacher = teacher, Workload = TimeSpan.FromHours(10)};
+            teacher.Disciplines.Add(disc);
+            
+            
+            escola.Employees.InsertOnSubmit(teacher);
+            escola.Disciplines.InsertOnSubmit(disc);
+
+            escola.SubmitChanges();
+        }
+
+        private void Button2_Click(object sender, System.Windows.RoutedEventArgs e)
+        {
+            var escola = new EmefFatima();
+            foreach (var employee in escola.Employees.OfType<Teacher>())
+            {
+                Console.WriteLine(employee.Disciplines.FirstOrDefault());
+            }
+            foreach (var discipline in escola.Disciplines)
+            {
+                Console.WriteLine(discipline);
+            }
         }
     }
 }

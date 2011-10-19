@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data.Linq.Mapping;
-using System.Linq;
-using System.Text;
+﻿using System.Data.Linq.Mapping;
 
 namespace School_Survey_Timetabling.Model
 {
@@ -17,14 +13,14 @@ namespace School_Survey_Timetabling.Model
     {
         [Column(IsDbGenerated=true, IsPrimaryKey=true)]
         private long Id { get; set; }
-
-        [Column(Name="AnoCiclo")]
-        public CycleYear CycleYear { get; set; }
-
-        [Column(Name="Sala")]
-        public Room Room { get; set; }
-
+        
         [Column(Name="Turno")]
         public Shift Shift { get; set; }
+
+        [Association(OtherKey = "Id")]
+        public CycleYear CycleYear { get; set; }
+
+        [Association(OtherKey = "Id")]
+        public Room Room { get; set; }
     }
 }

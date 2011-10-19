@@ -1,14 +1,19 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Data.Linq;
+using System.Data.Linq.Mapping;
 using System.Diagnostics.Contracts;
-using Extensions;
 using System.Linq;
-using System.Text;
+using Extensions;
 
 namespace School_Survey_Timetabling.Model
 {
     class Teacher : Employee
     {
+        public Teacher()
+        {
+            Role = Role.Teacher;
+            _disciplines = new EntitySet<Discipline>();
+        }
+
         [ContractInvariantMethod]
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic", Justification = "Required for code contracts.")]
         private void ObjectInvariant()
@@ -16,7 +21,13 @@ namespace School_Survey_Timetabling.Model
             Contract.Invariant(Disciplines.Select(d => d.Workload).Sum() <= Workload);
         }
 
-        public IEnumerable<Discipline> Disciplines { get; set; }
+        private EntitySet<Discipline> _disciplines;
 
+        [Association(Storage = "_disciplines", OtherKey="Id")]
+        public EntitySet<Discipline> Disciplines
+        {
+            get { return _disciplines; }
+            set { _disciplines.Assign(value); }
+        }
     }
 }

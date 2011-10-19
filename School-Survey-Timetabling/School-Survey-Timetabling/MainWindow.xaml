@@ -51,7 +51,7 @@
                                          LargeImageSource="Images\LargeIcon.png" Click="Buttonf_Click" />
 
                     <ribbon:RibbonButton x:Name="Button2"
-                                         SmallImageSource="Images\SmallIcon.png" />
+                                         SmallImageSource="Images\SmallIcon.png" Click="Button2_Click" />
                     <ribbon:RibbonButton x:Name="Button3"
                                          SmallImageSource="Images\SmallIcon.png"
                                          Label="Button3" />

@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace School_Survey_Timetabling.Model
 {
@@ -12,6 +9,7 @@ namespace School_Survey_Timetabling.Model
             Start = start;
             Duration = TimeSpan.FromMinutes(45);
             Discipline = discipline;
+            Length = BlockLength.Short;
         }
     }
 }
