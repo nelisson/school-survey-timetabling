@@ -3,13 +3,41 @@ using System.Data.Linq.Mapping;
 
 namespace School_Survey_Timetabling.Model
 {
-    [Database(Name="Escola")]
+    [Database(Name = "Escola")]
     internal class EmefFatima : DataContext
     {
         const string ConnectionString = "database.sdf";
-        //TODO: Botei uma tabela qualquer, só pra ver funcionar :D
-        public Table<Room> Classes;
 
+        public Table<Discipline> Disciplines
+        {
+            get { return GetTable<Discipline>(); }
+        }
+
+        public Table<Employee> Employees
+        {
+            get { return GetTable<Employee>(); }
+        }
+
+        public Table<Block> Blocks
+        {
+            get { return GetTable<Block>(); }
+        }
+
+        public Table<Class> Classes
+        {
+            get { return GetTable<Class>(); }
+        }
+
+        public Table<CycleYear> CycleYears
+        {
+            get { return GetTable<CycleYear>(); }
+        }
+
+        public Table<Room> Rooms
+        {
+            get { return GetTable<Room>(); }
+        }
+        
         public EmefFatima()
             : base(ConnectionString)
         {

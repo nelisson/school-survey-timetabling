@@ -170,7 +170,6 @@
     <Compile Include="Model\ShortBlock.cs" />
     <Compile Include="Model\Teacher.cs" />
     <Compile Include="Model\Volant.cs" />
-    <Compile Include="TesteLINQ.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
