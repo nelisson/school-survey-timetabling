@@ -5,6 +5,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "School-Survey-Timetabling",
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Extensions", "Extensions\Extensions.csproj", "{EADC0EEC-B2C6-4709-9BD4-CAB901093C51}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SouthernLapwing", "SouthernLapwing\SouthernLapwing.csproj", "{DA879B48-BBEE-451C-8410-AC8C5C37432F}"
+EndProject
 Global
 	GlobalSection(SubversionScc) = preSolution
 		Svn-Managed = True
@@ -52,6 +54,21 @@ Global
 		{EADC0EEC-B2C6-4709-9BD4-CAB901093C51}.VerifyContracts|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{EADC0EEC-B2C6-4709-9BD4-CAB901093C51}.VerifyContracts|Mixed Platforms.Build.0 = Release|Any CPU
 		{EADC0EEC-B2C6-4709-9BD4-CAB901093C51}.VerifyContracts|x86.ActiveCfg = Release|Any CPU
+		{DA879B48-BBEE-451C-8410-AC8C5C37432F}.Debug|Any CPU.ActiveCfg = Debug|x86
+		{DA879B48-BBEE-451C-8410-AC8C5C37432F}.Debug|Mixed Platforms.ActiveCfg = Debug|x86
+		{DA879B48-BBEE-451C-8410-AC8C5C37432F}.Debug|Mixed Platforms.Build.0 = Debug|x86
+		{DA879B48-BBEE-451C-8410-AC8C5C37432F}.Debug|x86.ActiveCfg = Debug|x86
+		{DA879B48-BBEE-451C-8410-AC8C5C37432F}.Debug|x86.Build.0 = Debug|x86
+		{DA879B48-BBEE-451C-8410-AC8C5C37432F}.Release|Any CPU.ActiveCfg = Release|x86
+		{DA879B48-BBEE-451C-8410-AC8C5C37432F}.Release|Mixed Platforms.ActiveCfg = Release|x86
+		{DA879B48-BBEE-451C-8410-AC8C5C37432F}.Release|Mixed Platforms.Build.0 = Release|x86
+		{DA879B48-BBEE-451C-8410-AC8C5C37432F}.Release|x86.ActiveCfg = Release|x86
+		{DA879B48-BBEE-451C-8410-AC8C5C37432F}.Release|x86.Build.0 = Release|x86
+		{DA879B48-BBEE-451C-8410-AC8C5C37432F}.VerifyContracts|Any CPU.ActiveCfg = Release|x86
+		{DA879B48-BBEE-451C-8410-AC8C5C37432F}.VerifyContracts|Mixed Platforms.ActiveCfg = Release|x86
+		{DA879B48-BBEE-451C-8410-AC8C5C37432F}.VerifyContracts|Mixed Platforms.Build.0 = Release|x86
+		{DA879B48-BBEE-451C-8410-AC8C5C37432F}.VerifyContracts|x86.ActiveCfg = Release|x86
+		{DA879B48-BBEE-451C-8410-AC8C5C37432F}.VerifyContracts|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
