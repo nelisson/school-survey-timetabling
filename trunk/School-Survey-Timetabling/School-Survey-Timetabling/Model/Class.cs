@@ -2,7 +2,7 @@
 
 namespace School_Survey_Timetabling.Model
 {
-    enum Shift
+    public enum Shift
     {
         Morning,
         Evening,

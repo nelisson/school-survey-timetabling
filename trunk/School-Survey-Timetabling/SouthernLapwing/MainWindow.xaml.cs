@@ -1,16 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
+using System.Net;
+using System.Net.Mail;
+using Microsoft.Windows.Controls;
 using Microsoft.Windows.Controls.Ribbon;
 
 namespace SouthernLapwing
@@ -20,16 +11,40 @@ namespace SouthernLapwing
     /// </summary>
     public partial class MainWindow : RibbonWindow
     {
+        private static object _token;
+
         public MainWindow()
         {
             InitializeComponent();
-
-            // Insert code required on object creation below this point.
         }
 
-        private void Rectangle_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        private void ButtonSendClick(object sender, System.Windows.RoutedEventArgs e)
         {
+            var client = new SmtpClient("smtp.gmail.com", 587)
+            {
+                Credentials = new NetworkCredential("fatimaescolateste@gmail.com", "admin123."),
+                EnableSsl = true,
+            };
+            var mail = new MailMessage("fatimaescolateste@gmail.com", "fatimaescolateste@gmail.com")
+                           {
+                               Subject = "Teste",
+                               Body = "WOW",
+                           };
+            Group1.IsEnabled = false;
+            client.SendCompleted += ClientSendCompleted;
+            busyIndicator.IsBusy = true;
             
+            client.SendAsync(mail, _token);
+        }
+
+        void ClientSendCompleted(object sender, System.ComponentModel.AsyncCompletedEventArgs e)
+        {
+            busyIndicator.IsBusy = false;
+            Group1.IsEnabled = true;
+            if(!(e.Cancelled && e.Error == null))
+                MessageBox.Show("Preferências enviadas com sucesso");
+            else
+                MessageBox.Show("Erro no envio");
         }
     }
 }
