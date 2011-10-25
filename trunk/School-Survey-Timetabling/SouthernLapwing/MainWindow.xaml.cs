@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Net;
 using System.Net.Mail;
+using System.Windows.Controls;
+using System.Windows.Media;
 using Microsoft.Windows.Controls;
 using Microsoft.Windows.Controls.Ribbon;
 
@@ -45,6 +47,32 @@ namespace SouthernLapwing
                 MessageBox.Show("Preferências enviadas com sucesso");
             else
                 MessageBox.Show("Erro no envio");
+        }
+
+        private void LabelMouseLeftButtonUp(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            var label = sender as Label;
+            if (label == null) return;
+
+            if (label.DataContext == null)
+            {
+                label.DataContext = 1;
+                return;
+            }
+
+            var value = (int)label.DataContext;
+            value = ((value + 1)%3);
+
+            label.DataContext = value == 0 ? 3 : value;
+
+        }
+
+        private void LabelDataContextChanged(object sender, System.Windows.DependencyPropertyChangedEventArgs e)
+        {
+            var label = sender as Label;
+            if (label == null) return;
+            
+            label.Background = new SolidColorBrush(Colors.AliceBlue);
         }
     }
 }
