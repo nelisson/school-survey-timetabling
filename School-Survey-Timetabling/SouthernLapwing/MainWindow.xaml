@@ -75,12 +75,27 @@
                     <ItemsControl Grid.Row="1" ItemsSource="Manhã" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                     <ItemsControl Grid.Row="2" ItemsSource="Tarde" HorizontalAlignment="Center" VerticalAlignment="Center"/>
 
-                    <Label Grid.Row="1" Grid.Column="1" Content="Prioridade" VerticalAlignment="Bottom" Padding="0,0,0,20" HorizontalAlignment="Center"/>
-                    <ComboBox Grid.Row="1" Grid.Column="1" VerticalAlignment="Bottom" HorizontalAlignment="Stretch">
-                        <ComboBoxItem>Opção 1</ComboBoxItem>
-                        <ComboBoxItem>Opção 2</ComboBoxItem>
-                        <ComboBoxItem>Opção 3</ComboBoxItem>
-                    </ComboBox>
+                    <Label Grid.Row="1" Grid.Column="1" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Content="{Binding}" Margin="1"
+                           HorizontalAlignment="Stretch" VerticalAlignment="Stretch" FontSize="64" MouseLeftButtonUp="LabelMouseLeftButtonUp" DataContextChanged="LabelDataContextChanged"/>
+                    <Label Grid.Row="1" Grid.Column="2" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Content="{Binding}" Margin="1"
+                           HorizontalAlignment="Stretch" VerticalAlignment="Stretch" FontSize="64" MouseLeftButtonUp="LabelMouseLeftButtonUp" DataContextChanged="LabelDataContextChanged"/>
+                    <Label Grid.Row="1" Grid.Column="3" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Content="{Binding}" Margin="1"
+                           HorizontalAlignment="Stretch" VerticalAlignment="Stretch" FontSize="64" MouseLeftButtonUp="LabelMouseLeftButtonUp" DataContextChanged="LabelDataContextChanged"/>
+                    <Label Grid.Row="1" Grid.Column="4" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Content="{Binding}" Margin="1"
+                           HorizontalAlignment="Stretch" VerticalAlignment="Stretch" FontSize="64" MouseLeftButtonUp="LabelMouseLeftButtonUp" DataContextChanged="LabelDataContextChanged"/>
+                    <Label Grid.Row="1" Grid.Column="5" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Content="{Binding}" Margin="1"
+                           HorizontalAlignment="Stretch" VerticalAlignment="Stretch" FontSize="64" MouseLeftButtonUp="LabelMouseLeftButtonUp" DataContextChanged="LabelDataContextChanged"/>
+                    <Label Grid.Row="2" Grid.Column="1" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Content="{Binding}" Margin="1"
+                           HorizontalAlignment="Stretch" VerticalAlignment="Stretch" FontSize="64" MouseLeftButtonUp="LabelMouseLeftButtonUp" DataContextChanged="LabelDataContextChanged"/>
+                    <Label Grid.Row="2" Grid.Column="2" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Content="{Binding}" Margin="1"
+                           HorizontalAlignment="Stretch" VerticalAlignment="Stretch" FontSize="64" MouseLeftButtonUp="LabelMouseLeftButtonUp" DataContextChanged="LabelDataContextChanged"/>
+                    <Label Grid.Row="2" Grid.Column="3" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Content="{Binding}" Margin="1"
+                           HorizontalAlignment="Stretch" VerticalAlignment="Stretch" FontSize="64" MouseLeftButtonUp="LabelMouseLeftButtonUp" DataContextChanged="LabelDataContextChanged"/>
+                    <Label Grid.Row="2" Grid.Column="4" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Content="{Binding}" Margin="1"
+                           HorizontalAlignment="Stretch" VerticalAlignment="Stretch" FontSize="64" MouseLeftButtonUp="LabelMouseLeftButtonUp" DataContextChanged="LabelDataContextChanged"/>
+                    <Label Grid.Row="2" Grid.Column="5" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Content="{Binding}" Margin="1"
+                           HorizontalAlignment="Stretch" VerticalAlignment="Stretch" FontSize="64" MouseLeftButtonUp="LabelMouseLeftButtonUp" DataContextChanged="LabelDataContextChanged"/>
+                    
                 </Grid>
             </Border>
         </extToolkit:BusyIndicator>
