@@ -4,7 +4,7 @@ using System.Data.SqlTypes;
 
 namespace School_Survey_Timetabling.Model
 {
-    enum Role
+    internal enum Role
     {
         Administrator,
         Teacher,
@@ -12,10 +12,10 @@ namespace School_Survey_Timetabling.Model
     }
 
     [Table(Name = "Servidores")]
-    [InheritanceMapping(Code = Role.Administrator, Type = typeof(Administrator), IsDefault = true)]
+    [InheritanceMapping(Code = Role.Administrator, Type = typeof (Administrator), IsDefault = true)]
     [InheritanceMapping(Code = Role.Teacher, Type = typeof (Teacher))]
     [InheritanceMapping(Code = Role.Volant, Type = typeof (Volant))]
-    abstract class Employee
+    internal abstract class Employee
     {
         [Column(IsDbGenerated = true, IsPrimaryKey = true)]
         private long Id { get; set; }
@@ -34,7 +34,7 @@ namespace School_Survey_Timetabling.Model
             get { return SqlWorkload - SqlDateTime.MinValue.Value; }
             set
             {
-                var dateTime = SqlDateTime.MinValue.Value;
+                DateTime dateTime = SqlDateTime.MinValue.Value;
                 SqlWorkload = new DateTime(dateTime.Year, dateTime.Month, dateTime.Day,
                                            value.Hours, value.Minutes, value.Seconds);
             }

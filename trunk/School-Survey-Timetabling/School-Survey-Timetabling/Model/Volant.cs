@@ -1,7 +1,6 @@
-﻿
-namespace School_Survey_Timetabling.Model
+﻿namespace School_Survey_Timetabling.Model
 {
-    class Volant : Teacher
+    internal class Volant : Teacher
     {
         public Volant()
         {

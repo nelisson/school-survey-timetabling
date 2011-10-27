@@ -6,7 +6,14 @@ namespace School_Survey_Timetabling.Model
     [Database(Name = "Escola")]
     internal class EmefFatima : DataContext
     {
-        const string ConnectionString = "database.sdf";
+        private const string ConnectionString = "database.sdf";
+
+        public EmefFatima()
+            : base(ConnectionString)
+        {
+            if (!DatabaseExists())
+                CreateDatabase();
+        }
 
         public Table<Discipline> Disciplines
         {
@@ -36,13 +43,6 @@ namespace School_Survey_Timetabling.Model
         public Table<Room> Rooms
         {
             get { return GetTable<Room>(); }
-        }
-        
-        public EmefFatima()
-            : base(ConnectionString)
-        {
-            if (!DatabaseExists())
-                CreateDatabase();
         }
     }
 }

@@ -1,70 +1,51 @@
 ﻿<ribbon:RibbonWindow x:Class="School_Survey_Timetabling.MainWindow"
-        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:ribbon="clr-namespace:Microsoft.Windows.Controls.Ribbon;assembly=RibbonControlsLibrary"
-        Title="MainWindow"
-		x:Name="RibbonWindow"
-		Width="640" Height="480">
-    <Grid x:Name="LayoutRoot">
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="*"/>
-        </Grid.RowDefinitions>
+                     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                     xmlns:ribbon="clr-namespace:Microsoft.Windows.Controls.Ribbon;assembly=RibbonControlsLibrary" Title="MainWindow"
+                     x:Name="RibbonWindow" Width="640" Height="480">
+  <Grid x:Name="LayoutRoot">
+    <Grid.RowDefinitions>
+      <RowDefinition Height="Auto" />
+      <RowDefinition Height="*" />
+    </Grid.RowDefinitions>
 
-        <ribbon:Ribbon x:Name="Ribbon">
+    <ribbon:Ribbon x:Name="Ribbon">
 
-            <ribbon:Ribbon.ApplicationMenu>
-                <ribbon:RibbonApplicationMenu SmallImageSource="Images\SmallIcon.png" >
-                    <ribbon:RibbonApplicationMenuItem Header="Hello _Ribbon"
-                                                      x:Name="MenuItem1"
-                                                      ImageSource="Images\LargeIcon.png"
-                                                      />
-                    <ribbon:RibbonApplicationSplitMenuItem></ribbon:RibbonApplicationSplitMenuItem>
-                    <ribbon:RibbonApplicationMenuItem Header="Hello _Ribbon2"
-                                                      x:Name="MenuItem2"
-                                                      ImageSource="Images\LargeIcon.png"
-                                                      IsCheckable="True">
-                        <ribbon:RibbonApplicationMenuItem StaysOpenOnClick="True">
-                            <ribbon:RibbonApplicationMenuItem.ItemsPanel>
-                                <ItemsPanelTemplate>
-                                    <ribbon:RibbonApplicationMenuItem Header="Hello _Ribbon3"
-                                                      x:Name="MenuItem3"
-                                                      ImageSource="Images\LargeIcon.png"
-                                                      IsCheckable="True">
-                                        
-                                    </ribbon:RibbonApplicationMenuItem>
-                                    
-                                </ItemsPanelTemplate>
-                            </ribbon:RibbonApplicationMenuItem.ItemsPanel>
-                        </ribbon:RibbonApplicationMenuItem>
+      <ribbon:Ribbon.ApplicationMenu>
+        <ribbon:RibbonApplicationMenu SmallImageSource="Images\SmallIcon.png">
+          <ribbon:RibbonApplicationMenuItem Header="Hello _Ribbon" x:Name="MenuItem1"
+                                            ImageSource="Images\LargeIcon.png" />
+          <ribbon:RibbonApplicationSplitMenuItem></ribbon:RibbonApplicationSplitMenuItem>
+          <ribbon:RibbonApplicationMenuItem Header="Hello _Ribbon2" x:Name="MenuItem2"
+                                            ImageSource="Images\LargeIcon.png" IsCheckable="True">
+            <ribbon:RibbonApplicationMenuItem StaysOpenOnClick="True">
+              <ribbon:RibbonApplicationMenuItem.ItemsPanel>
+                <ItemsPanelTemplate>
+                  <ribbon:RibbonApplicationMenuItem Header="Hello _Ribbon3" x:Name="MenuItem3"
+                                                    ImageSource="Images\LargeIcon.png" IsCheckable="True"></ribbon:RibbonApplicationMenuItem>
 
-                        </ribbon:RibbonApplicationMenuItem>
-                </ribbon:RibbonApplicationMenu>
-            </ribbon:Ribbon.ApplicationMenu>
-            
-            <ribbon:RibbonTab x:Name="HomeTab" 
-                              Header="Home">
-                <ribbon:RibbonGroup x:Name="Group1" 
-                                    Header="Group1" SnapsToDevicePixels="True">
+                </ItemsPanelTemplate>
+              </ribbon:RibbonApplicationMenuItem.ItemsPanel>
+            </ribbon:RibbonApplicationMenuItem>
 
-                    <ribbon:RibbonButton x:Name="Buttonf"
-                                         LargeImageSource="Images\LargeIcon.png" Click="Buttonf_Click" />
+          </ribbon:RibbonApplicationMenuItem>
+        </ribbon:RibbonApplicationMenu>
+      </ribbon:Ribbon.ApplicationMenu>
 
-                    <ribbon:RibbonButton x:Name="Button2"
-                                         SmallImageSource="Images\SmallIcon.png" Click="Button2_Click" />
-                    <ribbon:RibbonButton x:Name="Button3"
-                                         SmallImageSource="Images\SmallIcon.png"
-                                         Label="Button3" />
-                    <ribbon:RibbonButton x:Name="Button4"
-                                         SmallImageSource="Images\SmallIcon.png"
-                                         Label="Button4" />
+      <ribbon:RibbonTab x:Name="HomeTab" Header="Home">
+        <ribbon:RibbonGroup x:Name="Group1" Header="Group1" SnapsToDevicePixels="True">
 
-                </ribbon:RibbonGroup>
-                <ribbon:RibbonGroup x:Name="Group2"
-                                    Header="Group2"/>
+          <ribbon:RibbonButton x:Name="Buttonf" LargeImageSource="Images\LargeIcon.png" Click="Buttonf_Click" />
 
-            </ribbon:RibbonTab>
-        </ribbon:Ribbon>
-        
-    </Grid>
+          <ribbon:RibbonButton x:Name="Button2" SmallImageSource="Images\SmallIcon.png" Click="Button2_Click" />
+          <ribbon:RibbonButton x:Name="Button3" SmallImageSource="Images\SmallIcon.png" Label="Button3" />
+          <ribbon:RibbonButton x:Name="Button4" SmallImageSource="Images\SmallIcon.png" Label="Button4" />
+
+        </ribbon:RibbonGroup>
+        <ribbon:RibbonGroup x:Name="Group2" Header="Group2" />
+
+      </ribbon:RibbonTab>
+    </ribbon:Ribbon>
+
+  </Grid>
 </ribbon:RibbonWindow>

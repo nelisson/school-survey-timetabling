@@ -1,44 +1,40 @@
-﻿<Application x:Class="School_Survey_Timetabling.App"
-             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+﻿<Application x:Class="School_Survey_Timetabling.App" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:ribbon="clr-namespace:Microsoft.Windows.Controls.Ribbon;assembly=RibbonControlsLibrary"
              StartupUri="MainWindow.xaml">
-    <Application.Resources>
-		<!-- Resources scoped at the Application level should be defined here. -->
-        <Style TargetType="{x:Type ribbon:RibbonButton}">
-            
+  <Application.Resources>
+    <!-- Resources scoped at the Application level should be defined here. -->
+    <Style TargetType="{x:Type ribbon:RibbonButton}">
 
-            <Setter Property="Label" Value="WOW" />
-            <Setter Property="Background">
-                <Setter.Value>
-                    <SolidColorBrush Color="Red" />
-                </Setter.Value>
-            </Setter>
 
-            <Style.Triggers>
-                <EventTrigger RoutedEvent="ribbon:RibbonButton.MouseEnter">
-                    <BeginStoryboard>
-                        <Storyboard>
-                            <DoubleAnimation 
-                                Storyboard.TargetProperty="(ribbon:RibbonButton.RenderTransform).(ScaleTransform.ScaleX)" 
-                                From="1.0" To="1.1" Duration="0:0:0.05">
-                            </DoubleAnimation>
-                        </Storyboard>
-                    </BeginStoryboard>
-                </EventTrigger>
+      <Setter Property="Label" Value="WOW" />
+      <Setter Property="Background">
+        <Setter.Value>
+          <SolidColorBrush Color="Red" />
+        </Setter.Value>
+      </Setter>
 
-                <EventTrigger 
-                    RoutedEvent="ribbon:RibbonButton.MouseLeave">
-                    <BeginStoryboard>
-                        <Storyboard>
-                            <DoubleAnimation 
-                                Storyboard.TargetProperty="(ribbon:RibbonButton.RenderTransform).(ScaleTransform.ScaleX)"
-                                From="1.1" To="1.0" Duration="0:0:0.05">
-                            </DoubleAnimation>
-                        </Storyboard>
-                    </BeginStoryboard>
-                </EventTrigger>
-            </Style.Triggers>
-        </Style>
-    </Application.Resources>
+      <Style.Triggers>
+        <EventTrigger RoutedEvent="ribbon:RibbonButton.MouseEnter">
+          <BeginStoryboard>
+            <Storyboard>
+              <DoubleAnimation
+Storyboard.TargetProperty="(ribbon:RibbonButton.RenderTransform).(ScaleTransform.ScaleX)" From="1.0" To="1.1"
+Duration="0:0:0.05"></DoubleAnimation>
+            </Storyboard>
+          </BeginStoryboard>
+        </EventTrigger>
+
+        <EventTrigger RoutedEvent="ribbon:RibbonButton.MouseLeave">
+          <BeginStoryboard>
+            <Storyboard>
+              <DoubleAnimation
+Storyboard.TargetProperty="(ribbon:RibbonButton.RenderTransform).(ScaleTransform.ScaleX)" From="1.1" To="1.0"
+Duration="0:0:0.05"></DoubleAnimation>
+            </Storyboard>
+          </BeginStoryboard>
+        </EventTrigger>
+      </Style.Triggers>
+    </Style>
+  </Application.Resources>
 </Application>
