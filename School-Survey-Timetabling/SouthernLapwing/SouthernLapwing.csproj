@@ -67,6 +67,7 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Choice.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
@@ -107,6 +108,12 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\quero.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\School-Survey-Timetabling\School-Survey-Timetabling.csproj">
+      <Project>{F8461D46-BBA1-4130-B5FD-91749B236A6E}</Project>
+      <Name>School-Survey-Timetabling</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

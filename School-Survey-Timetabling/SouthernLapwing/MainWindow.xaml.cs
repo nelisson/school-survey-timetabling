@@ -35,7 +35,7 @@ namespace SouthernLapwing
             Group1.IsEnabled = false;
             client.SendCompleted += ClientSendCompleted;
             busyIndicator.IsBusy = true;
-            
+
             client.SendAsync(mail, _token);
         }
 
@@ -43,7 +43,7 @@ namespace SouthernLapwing
         {
             busyIndicator.IsBusy = false;
             Group1.IsEnabled = true;
-            if(!(e.Cancelled && e.Error == null))
+            if (!(e.Cancelled && e.Error == null))
                 MessageBox.Show("Preferências enviadas com sucesso");
             else
                 MessageBox.Show("Erro no envio");
@@ -61,7 +61,7 @@ namespace SouthernLapwing
             }
 
             var value = (int)label.DataContext;
-            value = ((value + 1)%3);
+            value = ((value + 1) % 3);
 
             label.DataContext = value == 0 ? 3 : value;
 
@@ -71,8 +71,25 @@ namespace SouthernLapwing
         {
             var label = sender as Label;
             if (label == null) return;
-            
+
             label.Background = new SolidColorBrush(Colors.AliceBlue);
+        }
+
+        private void Label_MouseRightButtonUp(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            var label = sender as Label;
+            if (label == null) return;
+
+            if (label.DataContext == null)
+            {
+                label.DataContext = 1;
+                return;
+            }
+
+            var value = (int)label.DataContext;
+            value = ((value - 1) % 3);
+
+            label.DataContext = value == 0 ? 3 : value;
         }
     }
 }
