@@ -5,24 +5,26 @@ using System.Data.SqlTypes;
 
 namespace School_Survey_Timetabling.Model
 {
-    enum BlockLength
+    internal enum BlockLength
     {
         Long,
         Short,
     }
 
     [Table(Name = "Blocos")]
-    [InheritanceMapping(Code = BlockLength.Short, Type = typeof(ShortBlock), IsDefault = true)]
-    [InheritanceMapping(Code = BlockLength.Long, Type = typeof(LongBlock))]
+    [InheritanceMapping(Code = BlockLength.Short, Type = typeof (ShortBlock), IsDefault = true)]
+    [InheritanceMapping(Code = BlockLength.Long, Type = typeof (LongBlock))]
     internal abstract class Block
     {
+        private EntityRef<Discipline> _discipline;
+
         [Column(IsDbGenerated = true, IsPrimaryKey = true)]
         private long Id { get; set; }
 
-        [Column(Name="Inicio")]
+        [Column(Name = "Inicio")]
         public DateTime Start { get; set; }
 
-        [Column(Name="Duracao")]
+        [Column(Name = "Duracao")]
         private DateTime SqlDuration { get; set; }
 
         [Column(Name = "Tamanho", IsDiscriminator = true)]
@@ -33,13 +35,11 @@ namespace School_Survey_Timetabling.Model
             get { return SqlDuration - SqlDateTime.MinValue.Value; }
             set
             {
-                var dateTime = SqlDateTime.MinValue.Value;
+                DateTime dateTime = SqlDateTime.MinValue.Value;
                 SqlDuration = new DateTime(dateTime.Year, dateTime.Month, dateTime.Day,
                                            value.Hours, value.Minutes, value.Seconds);
             }
         }
-
-        private EntityRef<Discipline> _discipline;
 
         public Discipline Discipline
         {

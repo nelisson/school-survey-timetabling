@@ -6,28 +6,34 @@ using Extensions;
 
 namespace School_Survey_Timetabling.Model
 {
-    enum CycleCode
+    internal enum CycleCode
     {
         A,
         B,
         C,
     }
 
-    enum ClassType
+    internal enum ClassType
     {
-        [Description("")]
-        Normal,
+        [Description("")] Normal,
 
-        [Description("P")]
-        Progression,
+        [Description("P")] Progression,
 
-        [Description("J")]
-        Kindergarten,
+        [Description("J")] Kindergarten,
     }
 
     [Table(Name = "AnoCiclos")]
-    class CycleYear
+    internal class CycleYear
     {
+        private EntityRef<Class> _class;
+
+        public CycleYear(int year, CycleCode cycleCode, ClassType classType)
+        {
+            Year = year;
+            CycleCode = cycleCode;
+            ClassType = classType;
+        }
+
         [Column(IsDbGenerated = true, IsPrimaryKey = true)]
         private long Id { get; set; }
 
@@ -40,11 +46,10 @@ namespace School_Survey_Timetabling.Model
         [Column(Name = "Tipo")]
         public ClassType ClassType { get; set; }
 
-        public CycleYear(int year, CycleCode cycleCode, ClassType classType)
+        public Class Class
         {
-            Year = year;
-            CycleCode = cycleCode;
-            ClassType = classType;
+            get { return _class.Entity; }
+            set { _class.Entity = value; }
         }
 
         public override string ToString()
@@ -52,15 +57,5 @@ namespace School_Survey_Timetabling.Model
             return String.Format(ClassType == ClassType.Progression ? "{1}{0}{2}" : "{0}{1}{2}",
                                  ClassType.GetDescriptionOrDefault(), CycleCode.GetDescriptionOrDefault(), Year);
         }
-
-        private EntityRef<Class> _class;
-        
-        public Class Class
-        {
-            get { return _class.Entity; }
-            set { _class.Entity = value; }
-        }
-        
-
     }
 }

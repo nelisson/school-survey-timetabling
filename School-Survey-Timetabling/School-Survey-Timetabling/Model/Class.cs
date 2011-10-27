@@ -8,13 +8,13 @@ namespace School_Survey_Timetabling.Model
         Evening,
     }
 
-    [Table(Name="Turmas")]
-    class Class
+    [Table(Name = "Turmas")]
+    internal class Class
     {
-        [Column(IsDbGenerated=true, IsPrimaryKey=true)]
+        [Column(IsDbGenerated = true, IsPrimaryKey = true)]
         private long Id { get; set; }
-        
-        [Column(Name="Turno")]
+
+        [Column(Name = "Turno")]
         public Shift Shift { get; set; }
 
         [Association(OtherKey = "Id")]

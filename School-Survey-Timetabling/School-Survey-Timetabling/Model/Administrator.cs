@@ -1,6 +1,6 @@
 ﻿namespace School_Survey_Timetabling.Model
 {
-    class Administrator : Employee
+    internal class Administrator : Employee
     {
         public Administrator()
         {

@@ -1,17 +1,21 @@
-﻿using System;
+﻿using System.ComponentModel;
+using System.Linq;
 using System.Net;
 using System.Net.Mail;
+using System.Text;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
-using Microsoft.Windows.Controls;
-using Microsoft.Windows.Controls.Ribbon;
+using System.Xml;
+using System.Xml.Serialization;
+using MessageBox = Microsoft.Windows.Controls.MessageBox;
 
 namespace SouthernLapwing
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
-    public partial class MainWindow : RibbonWindow
+    public partial class MainWindow
     {
         private static object _token;
 
@@ -20,26 +24,30 @@ namespace SouthernLapwing
             InitializeComponent();
         }
 
-        private void ButtonSendClick(object sender, System.Windows.RoutedEventArgs e)
+        private void ButtonSendClick(object sender, RoutedEventArgs e)
         {
+            Group1.IsEnabled = false;
+            busyIndicator.IsBusy = true;
+
             var client = new SmtpClient("smtp.gmail.com", 587)
-            {
-                Credentials = new NetworkCredential("fatimaescolateste@gmail.com", "admin123."),
-                EnableSsl = true,
-            };
+                             {
+                                 Credentials = new NetworkCredential("fatimaescolateste@gmail.com", "admin123."),
+                                 EnableSsl = true,
+                             };
             var mail = new MailMessage("fatimaescolateste@gmail.com", "fatimaescolateste@gmail.com")
                            {
                                Subject = "Teste",
-                               Body = "WOW",
+                               Body =
+                                   Serialize(
+                                       GridDays.Children.OfType<Label>().Where(l => l.DataContext != null).Select(
+                                           l => l.DataContext).Cast<Choice>().ToList()),
                            };
-            Group1.IsEnabled = false;
-            client.SendCompleted += ClientSendCompleted;
-            busyIndicator.IsBusy = true;
 
+            client.SendCompleted += ClientSendCompleted;
             client.SendAsync(mail, _token);
         }
 
-        void ClientSendCompleted(object sender, System.ComponentModel.AsyncCompletedEventArgs e)
+        private void ClientSendCompleted(object sender, AsyncCompletedEventArgs e)
         {
             busyIndicator.IsBusy = false;
             Group1.IsEnabled = true;
@@ -49,47 +57,40 @@ namespace SouthernLapwing
                 MessageBox.Show("Erro no envio");
         }
 
-        private void LabelMouseLeftButtonUp(object sender, System.Windows.Input.MouseButtonEventArgs e)
-        {
-            var label = sender as Label;
-            if (label == null) return;
-
-            if (label.DataContext == null)
-            {
-                label.DataContext = 1;
-                return;
-            }
-
-            var value = (int)label.DataContext;
-            value = ((value + 1) % 3);
-
-            label.DataContext = value == 0 ? 3 : value;
-
-        }
-
-        private void LabelDataContextChanged(object sender, System.Windows.DependencyPropertyChangedEventArgs e)
+        private void LabelDataContextChanged(object sender, DependencyPropertyChangedEventArgs e)
         {
             var label = sender as Label;
             if (label == null) return;
 
             label.Background = new SolidColorBrush(Colors.AliceBlue);
+
+            foreach (Label child in GridDays.Children.OfType<Label>().Where(c => c.DataContext != null && c != label))
+            {
+                if ((child.DataContext as Choice).Priority != (label.DataContext as Choice).Priority)
+                {
+                    label.Background = new SolidColorBrush(Colors.AliceBlue);
+                    child.Background = new SolidColorBrush(Colors.AliceBlue);
+                    continue;
+                }
+
+                child.Background = new SolidColorBrush(Colors.Tomato);
+                label.Background = new SolidColorBrush(Colors.Tomato);
+            }
         }
 
-        private void Label_MouseRightButtonUp(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        public string Serialize<T>(T _object)
         {
-            var label = sender as Label;
-            if (label == null) return;
+            var xmlSettings = new XmlWriterSettings
+                                  {OmitXmlDeclaration = true, Indent = true, NewLineOnAttributes = true};
 
-            if (label.DataContext == null)
-            {
-                label.DataContext = 1;
-                return;
-            }
+            var serializer = new XmlSerializer(_object.GetType());
 
-            var value = (int)label.DataContext;
-            value = ((value - 1) % 3);
+            var stringBuilder = new StringBuilder();
 
-            label.DataContext = value == 0 ? 3 : value;
+            using (XmlWriter writer = XmlWriter.Create(stringBuilder, xmlSettings))
+                serializer.Serialize(writer, _object);
+
+            return stringBuilder.ToString();
         }
     }
 }
