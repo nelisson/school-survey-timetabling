@@ -8,7 +8,8 @@ namespace Extensions
     {
         public static string Serialize<T>(this T _object)
         {
-            var xmlSettings = new XmlWriterSettings { OmitXmlDeclaration = true, Indent = true, NewLineOnAttributes = true };
+            var xmlSettings = new XmlWriterSettings
+                                  {OmitXmlDeclaration = true, Indent = true, NewLineOnAttributes = true};
 
             var serializer = new XmlSerializer(_object.GetType());
 
