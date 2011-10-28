@@ -11,14 +11,13 @@ namespace SouthernLapwing
     /// </summary>
     public partial class App
     {
-        protected void LabelMouseUp(object sender, MouseButtonEventArgs e)
+        private void LabelMouseUp(object sender, MouseButtonEventArgs e)
         {
-            var label = sender as Label;
-            if (label == null) return;
-
+            var label = (Label)sender;
+            
             if (label.DataContext == null)
             {
-                label.DataContext = new Choice
+                label.DataContext = new Alternative
                                         {
                                             Priority = e.ChangedButton == MouseButton.Left ? 1 : 3,
                                             DayOfWeek = (DayOfWeek) ((int) label.GetValue(Grid.ColumnProperty) + 1),
@@ -27,10 +26,10 @@ namespace SouthernLapwing
                 return;
             }
 
-            var value = (Choice) label.DataContext;
+            var value = (Alternative) label.DataContext;
 
-            value.Priority = value.Priority + (1*(e.ChangedButton == MouseButton.Left ? 1 : -1));
-            label.DataContext = value.Priority < 1 || value.Priority > 3 ? null : new Choice(value);
+            value.Priority = value.Priority + (e.ChangedButton == MouseButton.Left ? 1 : -1);
+            label.DataContext = value.Priority < 1 || value.Priority > 3 ? null : new Alternative(value);
 
             if (label.DataContext == null)
                 label.Background = new SolidColorBrush(Colors.White);

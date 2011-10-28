@@ -2,12 +2,10 @@
 using System.Linq;
 using System.Net;
 using System.Net.Mail;
-using System.Text;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
-using System.Xml;
-using System.Xml.Serialization;
+using Extensions;
 using MessageBox = Microsoft.Windows.Controls.MessageBox;
 
 namespace SouthernLapwing
@@ -17,7 +15,9 @@ namespace SouthernLapwing
     /// </summary>
     public partial class MainWindow
     {
-        private static object _token;
+        private static readonly object Token = new object();
+        private static readonly Brush ErrorColor = new SolidColorBrush(Colors.Tomato);
+        private static readonly Brush OkColor = new SolidColorBrush(Colors.Cyan);
 
         public MainWindow()
         {
@@ -26,7 +26,25 @@ namespace SouthernLapwing
 
         private void ButtonSendClick(object sender, RoutedEventArgs e)
         {
-            Group1.IsEnabled = false;
+
+            if (!InputIsValid())
+            {
+                MessageBox.Show("Existem conflitos na tabela","ERRO",MessageBoxButton.OK,MessageBoxImage.Error);
+                return;
+            }
+
+            var teacherChoice = new TeacherChoice
+                                    {
+                                        Alternatives = GridDays.Children
+                                            .OfType<Label>()
+                                            .Where(l => l.DataContext != null)
+                                            .Select(l => l.DataContext)
+                                            .Cast<Alternative>().ToList(),
+                                        Email = "manolo@gg.com",
+                                        Name = "Mano",
+                                    };
+
+            Options.IsEnabled = false;
             busyIndicator.IsBusy = true;
 
             var client = new SmtpClient("smtp.gmail.com", 587)
@@ -37,20 +55,22 @@ namespace SouthernLapwing
             var mail = new MailMessage("fatimaescolateste@gmail.com", "fatimaescolateste@gmail.com")
                            {
                                Subject = "Teste",
-                               Body =
-                                   Serialize(
-                                       GridDays.Children.OfType<Label>().Where(l => l.DataContext != null).Select(
-                                           l => l.DataContext).Cast<Choice>().ToList()),
+                               Body = teacherChoice.Serialize(),
                            };
 
             client.SendCompleted += ClientSendCompleted;
-            client.SendAsync(mail, _token);
+            client.SendAsync(mail, Token);
+        }
+
+        private bool InputIsValid()
+        {
+            return !GridDays.Children.OfType<Label>().Any(l => l.Background == ErrorColor); 
         }
 
         private void ClientSendCompleted(object sender, AsyncCompletedEventArgs e)
         {
             busyIndicator.IsBusy = false;
-            Group1.IsEnabled = true;
+            Options.IsEnabled = true;
             if (!(e.Cancelled && e.Error == null))
                 MessageBox.Show("Preferências enviadas com sucesso");
             else
@@ -59,38 +79,21 @@ namespace SouthernLapwing
 
         private void LabelDataContextChanged(object sender, DependencyPropertyChangedEventArgs e)
         {
-            var label = sender as Label;
-            if (label == null) return;
+            var days = GridDays.Children
+                .OfType<Label>()
+                .Where(l => l.DataContext != null)
+                .Select(l => new {Alternative = l.DataContext as Alternative, Label = l})
+                .ToLookup(item => item.Alternative.Priority);
 
-            label.Background = new SolidColorBrush(Colors.AliceBlue);
-
-            foreach (Label child in GridDays.Children.OfType<Label>().Where(c => c.DataContext != null && c != label))
+            foreach (var alternative in days.Where(d => d.Count() > 1).SelectMany(group => group.ToList()))
             {
-                if ((child.DataContext as Choice).Priority != (label.DataContext as Choice).Priority)
-                {
-                    label.Background = new SolidColorBrush(Colors.AliceBlue);
-                    child.Background = new SolidColorBrush(Colors.AliceBlue);
-                    continue;
-                }
-
-                child.Background = new SolidColorBrush(Colors.Tomato);
-                label.Background = new SolidColorBrush(Colors.Tomato);
+                alternative.Label.Background = ErrorColor;
             }
-        }
-
-        public string Serialize<T>(T _object)
-        {
-            var xmlSettings = new XmlWriterSettings
-                                  {OmitXmlDeclaration = true, Indent = true, NewLineOnAttributes = true};
-
-            var serializer = new XmlSerializer(_object.GetType());
-
-            var stringBuilder = new StringBuilder();
-
-            using (XmlWriter writer = XmlWriter.Create(stringBuilder, xmlSettings))
-                serializer.Serialize(writer, _object);
-
-            return stringBuilder.ToString();
+            
+            foreach (var alternative in days.Where(d => d.Count() == 1).SelectMany(group => group.ToList()))
+            {
+                alternative.Label.Background = OkColor;
+            }
         }
     }
 }
