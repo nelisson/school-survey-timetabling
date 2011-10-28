@@ -5,31 +5,24 @@
                      xmlns:extToolkit="http://schemas.microsoft.com/winfx/2006/xaml/presentation/toolkit/extended" Title="Quero-Quero"
                      x:Name="RibbonWindow" Icon="Images\quero.png" Width="640" Height="480">
 
-  <Grid x:Name="LayoutRoot">
+  <Grid>
     <Grid.RowDefinitions>
       <RowDefinition Height="Auto" />
       <RowDefinition Height="*" />
     </Grid.RowDefinitions>
 
-    <ribbon:Ribbon x:Name="Ribbon">
-      <ribbon:Ribbon.ApplicationMenu>
-        <ribbon:RibbonApplicationMenu SmallImageSource="Images\SmallIcon.png">
-          <ribbon:RibbonApplicationMenuItem Header="Hello _Ribbon" x:Name="MenuItem1"
-                                            ImageSource="Images\LargeIcon.png" />
-        </ribbon:RibbonApplicationMenu>
-      </ribbon:Ribbon.ApplicationMenu>
-      <ribbon:RibbonTab x:Name="HomeTab" Header="Home">
-        <ribbon:RibbonGroup x:Name="Group1" Header="Group1">
-          <ribbon:RibbonButton x:Name="ButtonSave" LargeImageSource="Images\save.png" Label="Salvar" />
-          <ribbon:RibbonButton x:Name="ButtonSend" LargeImageSource="Images\mail.png" Label="Enviar"
+    <ribbon:Ribbon>      
+      <ribbon:RibbonTab Header="Home">
+        <ribbon:RibbonGroup x:Name="Options" Header="Opções" x:FieldModifier="private">
+                    <ribbon:RibbonButton LargeImageSource="Images\mail.png" Label="Enviar"
                                Click="ButtonSendClick" />
-          <ribbon:RibbonButton x:Name="ButtonRefresh" LargeImageSource="Images\refresh.png" Label="Atualizar" />
+          <ribbon:RibbonButton LargeImageSource="Images\refresh.png" Label="Atualizar" />
         </ribbon:RibbonGroup>
 
       </ribbon:RibbonTab>
     </ribbon:Ribbon>
     <extToolkit:BusyIndicator Grid.Row="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
-                              Name="busyIndicator" BusyContent="Enviando...">
+                              Name="busyIndicator" BusyContent="Enviando..." x:FieldModifier="private">
       <Border Grid.Row="1" Margin="5" BorderThickness="1" BorderBrush="LightSkyBlue">
         <Grid VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
           <Grid.RowDefinitions>
@@ -69,7 +62,8 @@
           <ItemsControl Grid.Row="2" ItemsSource="Tarde" HorizontalAlignment="Center"
                         VerticalAlignment="Center" />
 
-          <Grid Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="5" Grid.RowSpan="2" Name="GridDays">
+          <Grid Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="5" Grid.RowSpan="2" Name="GridDays"
+                x:FieldModifier="private">
             <Grid.RowDefinitions>
               <RowDefinition />
               <RowDefinition />

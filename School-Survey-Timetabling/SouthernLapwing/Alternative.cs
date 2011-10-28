@@ -3,16 +3,16 @@ using School_Survey_Timetabling.Model;
 
 namespace SouthernLapwing
 {
-    public class Choice
+    public class Alternative
     {
-        public Choice(Choice _choice)
+        public Alternative(Alternative alternative)
         {
-            Priority = _choice.Priority;
-            DayOfWeek = _choice.DayOfWeek;
-            Shift = _choice.Shift;
+            Priority = alternative.Priority;
+            DayOfWeek = alternative.DayOfWeek;
+            Shift = alternative.Shift;
         }
 
-        public Choice()
+        public Alternative()
         {
         }
 
