@@ -7,6 +7,7 @@ using System.Windows.Controls;
 using System.Windows.Media;
 using Extensions;
 using MessageBox = Microsoft.Windows.Controls.MessageBox;
+using Common;
 
 namespace SouthernLapwing
 {
@@ -39,7 +40,7 @@ namespace SouthernLapwing
                                             .OfType<Label>()
                                             .Where(l => l.DataContext != null)
                                             .Select(l => l.DataContext)
-                                            .Cast<Alternative>().ToList(),
+                                            .Cast<Common.Alternative>().ToList(),
                                         Email = "manolo@gg.com",
                                         Name = "Mano",
                                     };
