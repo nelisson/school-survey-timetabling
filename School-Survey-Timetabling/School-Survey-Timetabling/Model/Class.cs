@@ -1,13 +1,8 @@
 ﻿using System.Data.Linq.Mapping;
+using Common;
 
 namespace School_Survey_Timetabling.Model
 {
-    public enum Shift
-    {
-        Morning,
-        Evening,
-    }
-
     [Table(Name = "Turmas")]
     internal class Class
     {

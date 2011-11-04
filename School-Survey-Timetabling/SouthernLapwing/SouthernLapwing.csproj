@@ -111,13 +111,13 @@
     <Resource Include="Images\quero.png" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Common\Common.csproj">
+      <Project>{1B0E12A2-9C50-42AF-BC25-1054528A63A2}</Project>
+      <Name>Common</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Extensions\Extensions.csproj">
       <Project>{EADC0EEC-B2C6-4709-9BD4-CAB901093C51}</Project>
       <Name>Extensions</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\School-Survey-Timetabling\School-Survey-Timetabling.csproj">
-      <Project>{F8461D46-BBA1-4130-B5FD-91749B236A6E}</Project>
-      <Name>School-Survey-Timetabling</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
