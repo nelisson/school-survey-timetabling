@@ -1,5 +1,5 @@
 ﻿<Application x:Class="SouthernLapwing.App" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:local="clr-namespace:SouthernLapwing"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              StartupUri="Welcome.xaml">
     <Application.Resources>
         <!-- Resources scoped at the Application level should be defined here. -->
@@ -34,19 +34,20 @@
         <Style x:Key="LineStyle" TargetType="Line">
             <Setter Property="Stroke" Value="Silver"/>
             <Setter Property="StrokeThickness" Value="3"/>
-            <Setter Property="X1" Value="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=Border}
-                , Path=ActualWidth, Converter={local:Multiplier Factor=0.25}}"/>
+            <Setter Property="X1" Value="0"/>
             <Setter Property="Y1" Value="0" />
-            <Setter Property="X2" Value="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=Border}
-                , Path=ActualWidth, Converter={local:Multiplier Factor=0.25}}"/>
+            <Setter Property="X2" Value="0"/>
             <Setter Property="Y2" Value="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=Border}
                 , Path=ActualHeight}"/>
+            <Setter Property="MaxWidth" Value="3"/>
         </Style>
         <Style x:Key="BorderStyle" TargetType="Border">
             <Setter Property="BorderBrush" Value="Silver"/>
             <Setter Property="BorderThickness" Value="3"/>
             <Setter Property="CornerRadius" Value="30"/>
-            <Setter Property="Margin" Value="0,5,0,5"/>            
+            <Setter Property="Margin" Value="0,5,0,5"/>
+            <Setter Property="Padding" Value="8"/>
+            <Setter Property="MaxHeight" Value="80"/>
         </Style>
     </Application.Resources>
 </Application>
