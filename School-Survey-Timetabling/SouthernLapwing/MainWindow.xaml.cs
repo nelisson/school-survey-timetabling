@@ -20,9 +20,18 @@ namespace SouthernLapwing
         private static readonly Brush ErrorColor = new SolidColorBrush(Colors.Tomato);
         private static readonly Brush OkColor = new SolidColorBrush(Colors.Cyan);
 
+        string Email { get; set; }
+        string FullName { get; set; }
+
         public MainWindow()
         {
             InitializeComponent();
+        }
+
+        public MainWindow(string email, string name) : this()
+        {
+            Email = email;
+            FullName = name;
         }
 
         private void ButtonSendClick(object sender, RoutedEventArgs e)
@@ -40,9 +49,9 @@ namespace SouthernLapwing
                                             .OfType<Label>()
                                             .Where(l => l.DataContext != null)
                                             .Select(l => l.DataContext)
-                                            .Cast<Common.Alternative>().ToList(),
-                                        Email = "manolo@gg.com",
-                                        Name = "Mano",
+                                            .Cast<Alternative>().ToList(),
+                                        Email = Email,
+                                        Name = FullName,
                                     };
 
             Options.IsEnabled = false;

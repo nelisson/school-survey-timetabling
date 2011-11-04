@@ -9,7 +9,7 @@ namespace Extensions
     {
         public static string GetDescription(this Enum e)
         {
-            DescriptionAttribute description = (DescriptionAttribute) e.GetType()
+            var description = (DescriptionAttribute) e.GetType()
                                                                           .GetCustomAttributes(
                                                                               typeof (DescriptionAttribute), false).
                                                                           FirstOrDefault() ?? new DescriptionAttribute();
