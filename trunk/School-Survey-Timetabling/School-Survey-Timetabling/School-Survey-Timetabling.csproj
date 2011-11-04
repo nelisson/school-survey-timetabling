@@ -213,6 +213,10 @@
     <Resource Include="Images\SmallIcon.png" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Common\Common.csproj">
+      <Project>{1B0E12A2-9C50-42AF-BC25-1054528A63A2}</Project>
+      <Name>Common</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Extensions\Extensions.csproj">
       <Project>{EADC0EEC-B2C6-4709-9BD4-CAB901093C51}</Project>
       <Name>Extensions</Name>
