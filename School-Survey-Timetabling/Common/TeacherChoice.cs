@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace SouthernLapwing
+namespace Common
 {
     public class TeacherChoice
     {

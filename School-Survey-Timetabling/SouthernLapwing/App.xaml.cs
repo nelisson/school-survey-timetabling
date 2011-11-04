@@ -2,7 +2,7 @@
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
-using School_Survey_Timetabling.Model;
+using Common;
 
 namespace SouthernLapwing
 {

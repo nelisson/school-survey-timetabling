@@ -1,12 +1,9 @@
 ﻿using System;
-using Common;
 
-namespace SouthernLapwing
+namespace Common
 {
     public class Alternative
     {
-        
-
         public Alternative(Alternative alternative)
         {
             Priority = alternative.Priority;
