@@ -1,51 +1,115 @@
 ﻿<ribbon:RibbonWindow x:Class="School_Survey_Timetabling.MainWindow"
                      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                     xmlns:local="clr-namespace:School_Survey_Timetabling"
+                     xmlns:model="clr-namespace:School_Survey_Timetabling.Model"
                      xmlns:ribbon="clr-namespace:Microsoft.Windows.Controls.Ribbon;assembly=RibbonControlsLibrary" Title="MainWindow"
                      x:Name="RibbonWindow" Width="640" Height="480">
-  <Grid x:Name="LayoutRoot">
-    <Grid.RowDefinitions>
-      <RowDefinition Height="Auto" />
-      <RowDefinition Height="*" />
-    </Grid.RowDefinitions>
+    <ribbon:RibbonWindow.Resources>
+        <local:IntSequence x:Key="defaultYearList" Start="1980" End="2015" />
+    </ribbon:RibbonWindow.Resources>
+    
+    <Grid x:Name="LayoutRoot">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
 
-    <ribbon:Ribbon x:Name="Ribbon">
+        <ribbon:Ribbon x:Name="Ribbon" Height="auto">
 
-      <ribbon:Ribbon.ApplicationMenu>
-        <ribbon:RibbonApplicationMenu SmallImageSource="Images\SmallIcon.png">
-          <ribbon:RibbonApplicationMenuItem Header="Hello _Ribbon" x:Name="MenuItem1"
+            <ribbon:Ribbon.ApplicationMenu>
+                <ribbon:RibbonApplicationMenu SmallImageSource="Images\SmallIcon.png">
+                    <ribbon:RibbonApplicationMenuItem Header="Hello _Ribbon" x:Name="MenuItem1"
                                             ImageSource="Images\LargeIcon.png" />
-          <ribbon:RibbonApplicationSplitMenuItem></ribbon:RibbonApplicationSplitMenuItem>
-          <ribbon:RibbonApplicationMenuItem Header="Hello _Ribbon2" x:Name="MenuItem2"
-                                            ImageSource="Images\LargeIcon.png" IsCheckable="True">
-            <ribbon:RibbonApplicationMenuItem StaysOpenOnClick="True">
-              <ribbon:RibbonApplicationMenuItem.ItemsPanel>
-                <ItemsPanelTemplate>
-                  <ribbon:RibbonApplicationMenuItem Header="Hello _Ribbon3" x:Name="MenuItem3"
+                    <ribbon:RibbonApplicationSplitMenuItem></ribbon:RibbonApplicationSplitMenuItem>
+                    <ribbon:RibbonApplicationMenuItem Header="Hello _Ribbon2" x:Name="MenuItem2"
+                                            ImageSource="Images\LargeIcon.png" IsCheckable="True" FlowDirection="LeftToRight">
+                        <ribbon:RibbonApplicationMenuItem StaysOpenOnClick="True">
+                            <ribbon:RibbonApplicationMenuItem.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <ribbon:RibbonApplicationMenuItem Header="Hello _Ribbon3" x:Name="MenuItem3"
                                                     ImageSource="Images\LargeIcon.png" IsCheckable="True"></ribbon:RibbonApplicationMenuItem>
 
-                </ItemsPanelTemplate>
-              </ribbon:RibbonApplicationMenuItem.ItemsPanel>
-            </ribbon:RibbonApplicationMenuItem>
+                                </ItemsPanelTemplate>
+                            </ribbon:RibbonApplicationMenuItem.ItemsPanel>
+                        </ribbon:RibbonApplicationMenuItem>
 
-          </ribbon:RibbonApplicationMenuItem>
-        </ribbon:RibbonApplicationMenu>
-      </ribbon:Ribbon.ApplicationMenu>
+                    </ribbon:RibbonApplicationMenuItem>
+                </ribbon:RibbonApplicationMenu>
+            </ribbon:Ribbon.ApplicationMenu>
 
-      <ribbon:RibbonTab x:Name="HomeTab" Header="Home">
-        <ribbon:RibbonGroup x:Name="Group1" Header="Group1" SnapsToDevicePixels="True">
+            <ribbon:RibbonTab Header="Cadastros" Height="auto">
+                <ribbon:RibbonGroup Height="95" >
 
-          <ribbon:RibbonButton x:Name="Buttonf" LargeImageSource="Images\LargeIcon.png" Click="Buttonf_Click" />
+                    <ribbon:RibbonRadioButton Name="radRegisterTeacher" Label="Professores" GroupName="registration" IsChecked="True"/>
+                    <ribbon:RibbonRadioButton Name="radRegisterDiscipline" Label="Disciplinas" GroupName="registration" />
+                    <ribbon:RibbonRadioButton Name="radRegisterClass" Label="Turmas" GroupName="registration" />
+                    <ribbon:RibbonRadioButton Name="radRegisterCycleYear" Label="Anos-Ciclo" GroupName="registration" />
 
-          <ribbon:RibbonButton x:Name="Button2" SmallImageSource="Images\SmallIcon.png" Click="Button2_Click" />
-          <ribbon:RibbonButton x:Name="Button3" SmallImageSource="Images\SmallIcon.png" Label="Button3" />
-          <ribbon:RibbonButton x:Name="Button4" SmallImageSource="Images\SmallIcon.png" Label="Button4" />
+                </ribbon:RibbonGroup>
+            </ribbon:RibbonTab>
+            <ribbon:RibbonTab Header="2o tab" Height="auto">
+                <ribbon:RibbonGroup Height="95">
+                    <ribbon:RibbonButton Label="Test"></ribbon:RibbonButton>
 
-        </ribbon:RibbonGroup>
-        <ribbon:RibbonGroup x:Name="Group2" Header="Group2" />
+                </ribbon:RibbonGroup>
+            </ribbon:RibbonTab>
+        </ribbon:Ribbon>
 
-      </ribbon:RibbonTab>
-    </ribbon:Ribbon>
+        <DockPanel HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.Row="1" Name="dockPanel1" >
+            <TabControl Name="tabControl1" >
+                <TabItem Visibility="Hidden" Selector.IsSelected="{Binding Path=IsChecked, ElementName=radRegisterTeacher}">
+                    <Grid />
+                </TabItem>
+                <TabItem Visibility="Hidden" Selector.IsSelected="{Binding Path=IsChecked, ElementName=radRegisterDiscipline}">
+                    <Grid />
+                </TabItem>
+                <TabItem Visibility="Hidden" Selector.IsSelected="{Binding Path=IsChecked, ElementName=radRegisterClass}">
+                    <Grid />
+                </TabItem>
+                <TabItem Visibility="Hidden" Selector.IsSelected="{Binding Path=IsChecked, ElementName=radRegisterCycleYear}">
+                    <StackPanel>
+                    <Label Content="Informacoes do Ano-Ciclo:"/>
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition></RowDefinition>
+                                <RowDefinition></RowDefinition>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="auto"></ColumnDefinition>
+                            </Grid.ColumnDefinitions>
+                            
+                            <StackPanel Grid.Row="0" Orientation="Horizontal">
+                                <Label Grid.Row="0" Grid.Column="0" 
+                                       Content="Ano:"/>
+                                <ComboBox Grid.Row="0" Grid.Column="1" 
+                                          Name="yearCombo" 
+                                          ItemsSource="{Binding Source={StaticResource defaultYearList}}"/>
 
-  </Grid>
+                                <Label Grid.Row="1" Grid.Column="0" 
+                                       Content="Ciclo:"/>
+                                <ComboBox Grid.Row="1" Grid.Column="1" 
+                                          Name="comboBox1" 
+                                          ItemsSource="{local:EnumValues model:CycleCode}"
+                                          DisplayMemberPath="Name"
+                                          SelectedValuePath="Value"/>
+                            </StackPanel>
+
+                            <StackPanel Grid.Row="1" Orientation="Horizontal">
+                                <Label Grid.Row="2" Grid.Column="0" 
+                                       Content="Tipo:"/>
+                                <ComboBox Grid.Row="2" Grid.Column="1" 
+                                          Name="type" 
+                                          ItemsSource="{local:EnumValues model:ClassType}"
+                                          DisplayMemberPath="Name"
+                                          SelectedValuePath="Value"/>
+                            </StackPanel>
+
+           
+    </Grid>
+                    </StackPanel>
+                </TabItem>
+            </TabControl>
+        </DockPanel>
+    </Grid>
 </ribbon:RibbonWindow>
