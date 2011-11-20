@@ -9,10 +9,11 @@ namespace Extensions
     {
         public static string GetDescription(this Enum e)
         {
-            var description = (DescriptionAttribute) e.GetType()
-                                                                          .GetCustomAttributes(
-                                                                              typeof (DescriptionAttribute), false).
-                                                                          FirstOrDefault() ?? new DescriptionAttribute();
+            var description = (DescriptionAttribute)e
+                .GetType()
+                .GetField(e.ToString())
+                .GetCustomAttributes(typeof(DescriptionAttribute), false)
+                .FirstOrDefault() ?? new DescriptionAttribute();
 
             return description.Description;
         }
@@ -21,7 +22,8 @@ namespace Extensions
         public static string GetDescriptionOrDefault(this Enum e)
         {
             Contract.Ensures(Contract.Result<string>() != null);
-            return e.GetDescription() ?? e.ToString();
+            string description = e.GetDescription();
+            return string.IsNullOrEmpty(description) ? e.ToString() : description;
         }
     }
 }

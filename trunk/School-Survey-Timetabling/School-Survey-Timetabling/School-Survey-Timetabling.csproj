@@ -158,8 +158,12 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="EnumValuesExtension.cs" />
+    <Compile Include="IntSequence.cs" />
     <Compile Include="Model\Administrator.cs" />
     <Compile Include="Model\Block.cs" />
+    <Compile Include="Model\ClassType.cs" />
+    <Compile Include="Model\CycleCode.cs" />
     <Compile Include="Model\CycleYear.cs" />
     <Compile Include="Model\Class.cs" />
     <Compile Include="Model\Discipline.cs" />
@@ -232,6 +236,7 @@
     <Content Include="Libraries\sqlcese35.dll" />
     <Content Include="Libraries\System.Data.SqlServerCe.dll" />
     <Content Include="Libraries\System.Data.SqlServerCe.Entity.dll" />
+    <Content Include="Libraries\WPFToolkit.Extended.dll" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

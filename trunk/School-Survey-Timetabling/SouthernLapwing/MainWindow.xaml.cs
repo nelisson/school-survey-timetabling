@@ -7,7 +7,13 @@ using System.Windows.Controls;
 using System.Windows.Media;
 using Extensions;
 using MessageBox = Microsoft.Windows.Controls.MessageBox;
+<<<<<<< .mine
 using Common;
+using System.IO;
+using System.Net.Mime;
+=======
+using Common;
+>>>>>>> .r31
 
 namespace SouthernLapwing
 {
@@ -20,9 +26,21 @@ namespace SouthernLapwing
         private static readonly Brush ErrorColor = new SolidColorBrush(Colors.Tomato);
         private static readonly Brush OkColor = new SolidColorBrush(Colors.Cyan);
 
+<<<<<<< .mine
+        public string TeacherEmail { get; set; }
+        public string TeacherFullName { get; set; }
+
+        public MainWindow(string name, string email) : this() 
+        {
+            TeacherFullName = name;
+            TeacherEmail = email;
+        }
+
+=======
         string Email { get; set; }
         string FullName { get; set; }
 
+>>>>>>> .r31
         public MainWindow()
         {
             InitializeComponent();
@@ -50,8 +68,13 @@ namespace SouthernLapwing
                                             .Where(l => l.DataContext != null)
                                             .Select(l => l.DataContext)
                                             .Cast<Alternative>().ToList(),
+<<<<<<< .mine
+                                        Email = TeacherEmail,
+                                        Name = TeacherFullName,
+=======
                                         Email = Email,
                                         Name = FullName,
+>>>>>>> .r31
                                     };
 
             Options.IsEnabled = false;
@@ -62,11 +85,14 @@ namespace SouthernLapwing
                                  Credentials = new NetworkCredential("fatimaescolateste@gmail.com", "admin123."),
                                  EnableSsl = true,
                              };
+
+            var contentType = new ContentType("text/xml") { Name = "teacherChoice.xml" };
+            var xmlAttachment = Attachment.CreateAttachmentFromString(teacherChoice.Serialize(), contentType);
             var mail = new MailMessage("fatimaescolateste@gmail.com", "fatimaescolateste@gmail.com")
                            {
                                Subject = "Teste",
-                               Body = teacherChoice.Serialize(),
                            };
+            mail.Attachments.Add(xmlAttachment);
 
             client.SendCompleted += ClientSendCompleted;
             client.SendAsync(mail, Token);
