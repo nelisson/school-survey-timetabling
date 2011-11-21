@@ -1,0 +1,43 @@
+﻿<Page x:Class="School_Survey_Timetabling.Register"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:model="clr-namespace:School_Survey_Timetabling.Model"
+      xmlns:local="clr-namespace:School_Survey_Timetabling"
+      mc:Ignorable="d" 
+      d:DesignHeight="300" d:DesignWidth="300"
+	Title="Register">
+    <Page.Resources>
+        <DataTemplate DataType="{x:Type model:Room}">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>                    
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>                    
+                </Grid.RowDefinitions>
+                <Label Content="Código" Grid.Column="0" Grid.Row="0"/>
+                <TextBox Grid.Column="1" Grid.Row="0" Text="{Binding Code}"/>
+                <Label Content="Turma" Grid.Column="0" Grid.Row="1"/>
+                <TextBox Grid.Column="1" Grid.Row="1" Text="{Binding Class}"/>
+            </Grid>
+        </DataTemplate>
+        <model:EmefFatima x:Key="Emef"/>
+    </Page.Resources>    
+    <DockPanel>
+        <StackPanel DockPanel.Dock="Left" Margin="10,0">
+            <ListBox Name="Rooms" ItemsSource="{Binding Rooms, Source={StaticResource Emef}}"/>                
+            <Button Content="Novo"/>
+        </StackPanel>
+        <StackPanel DockPanel.Dock="Right">
+            <ContentPresenter Content="{Binding Path=SelectedItem, ElementName=Rooms}"/>                
+            <StackPanel Orientation="Horizontal">
+                <Button Content="Salvar"/>
+                <Button Content="Cancelar"/>
+            </StackPanel>
+        </StackPanel>
+    </DockPanel>
+</Page>

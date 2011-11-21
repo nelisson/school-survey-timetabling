@@ -158,6 +158,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Register.xaml.cs">
+      <DependentUpon>Register.xaml</DependentUpon>
+    </Compile>
     <Compile Include="EnumValuesExtension.cs" />
     <Compile Include="IntSequence.cs" />
     <Compile Include="Model\Administrator.cs" />
@@ -174,6 +177,10 @@
     <Compile Include="Model\ShortBlock.cs" />
     <Compile Include="Model\Teacher.cs" />
     <Compile Include="Model\Volant.cs" />
+    <Page Include="Register.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

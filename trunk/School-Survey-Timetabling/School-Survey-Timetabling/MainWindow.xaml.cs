@@ -2,6 +2,7 @@
 using System.Diagnostics.Contracts;
 using System.Linq;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Media;
 using School_Survey_Timetabling.Model;
 using System.Collections.Generic;
@@ -15,6 +16,7 @@ namespace School_Survey_Timetabling
         public MainWindow()
         {
             InitializeComponent();
+            _frame.Navigate(new Register());
         }
 
         private void Buttonf_Click(object sender, RoutedEventArgs e)

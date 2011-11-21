@@ -54,9 +54,9 @@
 
                 </ribbon:RibbonGroup>
             </ribbon:RibbonTab>
-        </ribbon:Ribbon>
-
-        <DockPanel HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.Row="1" Name="dockPanel1" >
+        </ribbon:Ribbon>       
+        <Frame x:Name="_frame" Grid.Row="1"/>
+        <!--<DockPanel HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.Row="1" Name="dockPanel1" >
             <TabControl Name="tabControl1" >
                 <TabItem Visibility="Hidden" Selector.IsSelected="{Binding Path=IsChecked, ElementName=radRegisterTeacher}">
                     <Grid />
@@ -110,6 +110,6 @@
                     </StackPanel>
                 </TabItem>
             </TabControl>
-        </DockPanel>
-    </Grid>
+        </DockPanel>-->
+    </Grid>    
 </ribbon:RibbonWindow>
