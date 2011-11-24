@@ -1,42 +1,46 @@
-﻿using System;
-using System.Data.Linq.Mapping;
-using System.Data.SqlTypes;
-
-namespace School_Survey_Timetabling.Model
+﻿namespace School_Survey_Timetabling.Model
 {
-    internal enum Role
-    {
-        Administrator,
-        Teacher,
-        Volant,
-    }
+    using System;
+    using System.Data.Linq.Mapping;
+    using System.Data.SqlTypes;
+    using System.Diagnostics.Contracts;
 
     [Table(Name = "Servidores")]
-    [InheritanceMapping(Code = Role.Administrator, Type = typeof (Administrator), IsDefault = true)]
-    [InheritanceMapping(Code = Role.Teacher, Type = typeof (Teacher))]
-    [InheritanceMapping(Code = Role.Volant, Type = typeof (Volant))]
-    internal abstract class Employee : SchoolEntity
+    [InheritanceMapping(Code = EmployeeRole.Administrator, Type = typeof (Administrator), IsDefault = true)]
+    [InheritanceMapping(Code = EmployeeRole.Teacher, Type = typeof (Teacher))]
+    [InheritanceMapping(Code = EmployeeRole.Volant, Type = typeof (Volant))]
+    internal abstract partial class Employee : SchoolEntity
     {
         [Column(IsDbGenerated = true, IsPrimaryKey = true)]
         private int Id { get; set; }
 
+        private string _name;
         [Column(Name = "Nome")]
-        public string Name { get; set; }
+        public string Name
+        {
+            get { return _name; }
+            set
+            {
+                Contract.Requires<ArgumentException>(!String.IsNullOrEmpty(value));
+                _name = value;
+                OnPropertyChanged("Name");
+            }
+        }
 
         [Column(Name = "Funcao", IsDiscriminator = true)]
-        protected Role Role { get; set; }
+        protected EmployeeRole Role { get; set; }
 
         [Column(Name = "CargaHoraria")]
         private DateTime SqlWorkload { get; set; }
-
         public TimeSpan Workload
         {
             get { return SqlWorkload - SqlDateTime.MinValue.Value; }
             set
             {
-                DateTime dateTime = SqlDateTime.MinValue.Value;
-                SqlWorkload = new DateTime(dateTime.Year, dateTime.Month, dateTime.Day,
+                var sqlMinDate = SqlDateTime.MinValue.Value;
+                SqlWorkload = new DateTime(sqlMinDate.Year, sqlMinDate.Month, sqlMinDate.Day,
                                            value.Hours, value.Minutes, value.Seconds);
+                OnPropertyChanged("Workload");
             }
         }
     }

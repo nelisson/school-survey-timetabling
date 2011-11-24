@@ -1,7 +1,7 @@
-﻿using System.ComponentModel;
-
-namespace School_Survey_Timetabling.Model
+﻿namespace School_Survey_Timetabling.Model
 {
+    using System.ComponentModel;
+
     public abstract class SchoolEntity : INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;

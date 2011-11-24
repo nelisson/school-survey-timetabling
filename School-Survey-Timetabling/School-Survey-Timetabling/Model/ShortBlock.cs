@@ -1,14 +1,13 @@
-﻿using System;
-
-namespace School_Survey_Timetabling.Model
+﻿namespace School_Survey_Timetabling.Model
 {
+    using System;
+
     internal class ShortBlock : Block
     {
-        public ShortBlock()
-        {
-            
-        }
+        public ShortBlock() {}
+
         public ShortBlock(DateTime start, Discipline discipline)
+            : this()
         {
             Start = start;
             Duration = TimeSpan.FromMinutes(45);

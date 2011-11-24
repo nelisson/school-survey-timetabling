@@ -4,7 +4,7 @@
     {
         public Volant()
         {
-            Role = Role.Volant;
+            Role = EmployeeRole.Volant;
         }
     }
 }

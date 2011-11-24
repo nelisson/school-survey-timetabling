@@ -1,14 +1,13 @@
-﻿using System;
-
-namespace School_Survey_Timetabling.Model
+﻿namespace School_Survey_Timetabling.Model
 {
+    using System;
+
     internal class LongBlock : Block
     {
-        public LongBlock()
-        {
-            
-        }
+        public LongBlock() {}
+
         public LongBlock(DateTime start, Discipline discipline)
+            : this()
         {
             Start = start;
             Duration = TimeSpan.FromHours(1);
