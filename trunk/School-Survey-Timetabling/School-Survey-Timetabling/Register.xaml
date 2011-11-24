@@ -9,7 +9,33 @@
       d:DesignHeight="300" d:DesignWidth="300"
 	Title="Register">
     <Page.Resources>
-        <DataTemplate DataType="{x:Type model:Room}">
+        <DataTemplate x:Key="longClass" DataType="{x:Type model:Class}">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <Label Content="Turno" Grid.Column="0" Grid.Row="0"/>
+                <TextBox Grid.Column="1" Grid.Row="0" Text="{Binding Shift}"/>
+                <Label Content="Tipo" Grid.Column="0" Grid.Row="1"/>
+                <TextBox Grid.Column="1" Grid.Row="1" Text="{Binding Type}"/>
+            </Grid>
+        </DataTemplate>
+
+        <DataTemplate x:Key="shortRoom" DataType="{x:Type model:Room}">
+            <Border Background="AliceBlue">
+                <StackPanel Orientation="Horizontal">
+                    <Label Content="Código" />
+                    <TextBox Text="{Binding Code}"/>
+                </StackPanel>
+            </Border>
+        </DataTemplate>
+
+        <DataTemplate x:Key="longRoom" DataType="{x:Type model:Room}">
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition/>
@@ -22,22 +48,36 @@
                 <Label Content="Código" Grid.Column="0" Grid.Row="0"/>
                 <TextBox Grid.Column="1" Grid.Row="0" Text="{Binding Code}"/>
                 <Label Content="Turma" Grid.Column="0" Grid.Row="1"/>
-                <TextBox Grid.Column="1" Grid.Row="1" Text="{Binding Class}"/>
+                <ContentPresenter Content="{Binding Class}" Grid.Column="1" Grid.Row="1" />
             </Grid>
         </DataTemplate>
         <model:EmefFatima x:Key="Emef"/>
+        <BooleanToVisibilityConverter x:Key="boolToVis" />
     </Page.Resources>    
     <DockPanel>
-        <StackPanel DockPanel.Dock="Left" Margin="10,0">
-            <ListBox Name="Rooms" ItemsSource="{Binding Path=Rooms, Source={StaticResource Emef}, UpdateSourceTrigger=PropertyChanged, NotifyOnSourceUpdated=True}" />                
-            <Button Content="Novo" Click="Button_Click" />
+        <StackPanel DockPanel.Dock="Left" Margin="10,0"
+                    ScrollViewer.VerticalScrollBarVisibility="Auto">
+            <ListBox Name="Rooms" 
+                     Width="160"
+                     SelectedIndex="0"
+                     ItemTemplate="{Binding Source={StaticResource shortRoom}}"
+                     ItemsSource="{Binding Path=ObservableRooms, Source={StaticResource Emef}}" 
+                     Height="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=StackPanel, AncestorLevel=1}, Path=ActualHeight}"  />
+            
         </StackPanel>
         <StackPanel DockPanel.Dock="Right">
-            <ContentPresenter Content="{Binding Path=SelectedItem, ElementName=Rooms}"/>                
-            <StackPanel Orientation="Horizontal">
-                <Button Content="Salvar" Click="Button_Click_1" />
-                <Button Content="Cancelar"/>
-            </StackPanel>
+            <DockPanel>
+                <Button Content="Criar" Click="create_Click"  />
+                <Button Content="Excluir" Click="exclude_Click"  />
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                    <Button Content="Confirmar" Click="confirm_Click"  />
+                    <Button Content="Cancelar" Click="cancel_Click" />
+                </StackPanel>
+            </DockPanel>
+            
+            <ContentPresenter Content="{Binding Path=SelectedItem, ElementName=Rooms}" 
+                              Visibility="{Binding ElementName=Rooms, Path=HasItems, Converter={StaticResource boolToVis}}"
+                              ContentTemplate="{Binding Source={StaticResource longRoom}, TargetNullValue=''}"/>
         </StackPanel>
     </DockPanel>
 </Page>
