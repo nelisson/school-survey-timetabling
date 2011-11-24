@@ -14,10 +14,8 @@ namespace School_Survey_Timetabling.Model
     [Table(Name = "Blocos")]
     [InheritanceMapping(Code = BlockLength.Short, Type = typeof (ShortBlock), IsDefault = true)]
     [InheritanceMapping(Code = BlockLength.Long, Type = typeof (LongBlock))]
-    internal abstract class Block
+    internal abstract class Block : SchoolEntity
     {
-        private EntityRef<Discipline> _discipline;
-
         [Column(IsDbGenerated = true, IsPrimaryKey = true)]
         private int Id { get; set; }
 
@@ -41,6 +39,8 @@ namespace School_Survey_Timetabling.Model
             }
         }
 
+        private EntityRef<Discipline> _discipline;
+        [Association(OtherKey = "Id", Storage = "_discipline")]
         public Discipline Discipline
         {
             get { return _discipline.Entity; }

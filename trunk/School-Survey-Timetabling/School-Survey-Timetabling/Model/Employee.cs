@@ -15,7 +15,7 @@ namespace School_Survey_Timetabling.Model
     [InheritanceMapping(Code = Role.Administrator, Type = typeof (Administrator), IsDefault = true)]
     [InheritanceMapping(Code = Role.Teacher, Type = typeof (Teacher))]
     [InheritanceMapping(Code = Role.Volant, Type = typeof (Volant))]
-    internal abstract class Employee
+    internal abstract class Employee : SchoolEntity
     {
         [Column(IsDbGenerated = true, IsPrimaryKey = true)]
         private int Id { get; set; }

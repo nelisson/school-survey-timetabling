@@ -7,7 +7,8 @@ using System.Diagnostics.Contracts;
 namespace School_Survey_Timetabling.Model
 {
     [Table(Name = "Salas")]
-    internal class Room : INotifyPropertyChanged, IDataErrorInfo
+
+    internal class Room : SchoolEntity, IDataErrorInfo
     {
         [Column(IsDbGenerated = true, IsPrimaryKey = true)]
         private int Id { get; set; }
@@ -36,13 +37,6 @@ namespace School_Survey_Timetabling.Model
                 _class.Entity = value;
                 OnPropertyChanged("Class");
             }
-        }
-
-        public event PropertyChangedEventHandler PropertyChanged;
-        private void OnPropertyChanged(string propertyName)
-        {
-            if (PropertyChanged != null)
-                PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
         }
 
         public string Error

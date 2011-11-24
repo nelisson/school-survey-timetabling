@@ -7,7 +7,7 @@ using System.Diagnostics.Contracts;
 namespace School_Survey_Timetabling.Model
 {
     [Table(Name = "Turmas")]
-    internal class Class
+    internal class Class : SchoolEntity
     {
         public Class()
         {

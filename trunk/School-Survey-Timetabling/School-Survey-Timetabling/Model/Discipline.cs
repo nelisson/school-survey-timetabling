@@ -6,7 +6,7 @@ using System.Data.SqlTypes;
 namespace School_Survey_Timetabling.Model
 {
     [Table(Name = "Disciplinas")]
-    internal class Discipline
+    internal class Discipline : SchoolEntity
     {
         private EntityRef<Teacher> _teacher;
 
@@ -30,8 +30,13 @@ namespace School_Survey_Timetabling.Model
         [Column(Name = "Nome")]
         public string Name { get; set; }
 
-        [Association(OtherKey = "Id")]
-        public Block Block { get; set; }
+        private EntityRef<Block> _block;
+        [Association(OtherKey = "Id", Storage = "_block")]
+        public Block Block
+        {
+            get { return _block.Entity; }
+            set { _block.Entity = value; }
+        }
 
         public Teacher Teacher
         {
