@@ -13,6 +13,7 @@ namespace School_Survey_Timetabling.Model
 
         public Teacher()
         {
+            
             Role = Role.Teacher;
             _disciplines = new EntitySet<Discipline>();
         }

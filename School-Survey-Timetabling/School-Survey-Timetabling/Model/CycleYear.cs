@@ -7,13 +7,13 @@ using Extensions;
 namespace School_Survey_Timetabling.Model
 {
     [Table(Name = "AnosCiclos")]
-    internal class CycleYear
+    internal class CycleYear : SchoolEntity
     {
         public CycleYear()
         {
             
         }
-        private EntityRef<Class> _class;
+        
 
         public CycleYear(int year, CycleCode cycleCode, ClassType classType)
         {
@@ -34,6 +34,8 @@ namespace School_Survey_Timetabling.Model
         [Column(Name = "Tipo")]
         public ClassType ClassType { get; set; }
 
+        private EntityRef<Class> _class;
+        [Association(OtherKey = "Id", Storage = "_class")]
         public Class Class
         {
             get { return _class.Entity; }

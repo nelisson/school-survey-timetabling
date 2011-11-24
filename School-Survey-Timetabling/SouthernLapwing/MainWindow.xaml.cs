@@ -30,7 +30,7 @@ namespace SouthernLapwing
 
         public MainWindow()
         {
-            InitializeComponent();
+            InitializeComponent();            
         }
 
         public MainWindow(string email, string name) : this()
