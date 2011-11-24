@@ -1,4 +1,6 @@
-﻿using System.Data.Linq;
+﻿using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Data.Linq;
 using System.Data.Linq.Mapping;
 
 namespace School_Survey_Timetabling.Model

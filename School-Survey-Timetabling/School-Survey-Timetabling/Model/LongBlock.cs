@@ -4,6 +4,10 @@ namespace School_Survey_Timetabling.Model
 {
     internal class LongBlock : Block
     {
+        public LongBlock()
+        {
+            
+        }
         public LongBlock(DateTime start, Discipline discipline)
         {
             Start = start;

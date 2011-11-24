@@ -11,7 +11,7 @@ namespace School_Survey_Timetabling.Model
         private EntityRef<Teacher> _teacher;
 
         [Column(IsDbGenerated = true, IsPrimaryKey = true)]
-        private long Id { get; set; }
+        private int Id { get; set; }
 
         [Column(Name = "CargaHoraria")]
         private DateTime SqlWorkload { get; set; }
