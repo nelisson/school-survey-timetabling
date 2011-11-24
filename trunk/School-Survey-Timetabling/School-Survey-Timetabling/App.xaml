@@ -4,6 +4,16 @@
              StartupUri="MainWindow.xaml">
     <Application.Resources>
         <!-- Resources scoped at the Application level should be defined here. -->
+        <Style x:Key="textBoxInError" TargetType="{x:Type TextBox}">
+            <Style.Triggers>
+                <Trigger Property="Validation.HasError" Value="true">
+                    <Setter Property="ToolTip"
+                            Value="{Binding RelativeSource={x:Static RelativeSource.Self},
+                            Path=(Validation.Errors)[0].ErrorContent}"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+
         <Style TargetType="{x:Type ribbon:RibbonButton}">
             <Setter Property="Label" Value="WOW" />
             <Setter Property="Background">

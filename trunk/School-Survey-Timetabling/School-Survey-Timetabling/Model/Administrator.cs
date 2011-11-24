@@ -4,7 +4,7 @@
     {
         public Administrator()
         {
-            Role = Role.Administrator;
+            Role = EmployeeRole.Administrator;
         }
     }
 }

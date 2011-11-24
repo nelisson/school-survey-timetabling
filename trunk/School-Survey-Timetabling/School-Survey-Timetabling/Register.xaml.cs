@@ -1,15 +1,15 @@
-﻿using System;
-using System.Windows;
-using School_Survey_Timetabling.Model;
-
-namespace School_Survey_Timetabling
+﻿namespace School_Survey_Timetabling
 {
+    using System;
+    using System.Windows;
+    using School_Survey_Timetabling.Model;
+
     /// <summary>
     /// Interaction logic for Register.xaml
     /// </summary>
     public partial class Register
     {
-        private EmefFatima emef;
+        private readonly EmefFatima emef;
 
         public Register()
         {
@@ -20,6 +20,7 @@ namespace School_Survey_Timetabling
         private void create_Click(object sender, RoutedEventArgs e)
         {
             var room = new Room {Code = "E5", Class = new Class()};
+            room.Class.CycleYear = new CycleYear(2, CycleCode.A, ClassType.Progression);
             emef.ObservableRooms.Add(room);
             Rooms.SelectedItem = room;
         }

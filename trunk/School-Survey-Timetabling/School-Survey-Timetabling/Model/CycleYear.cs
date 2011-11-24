@@ -1,21 +1,18 @@
-﻿using System;
-using System.ComponentModel;
-using System.Data.Linq;
-using System.Data.Linq.Mapping;
-using Extensions;
-
-namespace School_Survey_Timetabling.Model
+﻿namespace School_Survey_Timetabling.Model
 {
+    using System;
+    using System.Data.Linq;
+    using System.Data.Linq.Mapping;
+    using System.Diagnostics.Contracts;
+    using Extensions;
+
     [Table(Name = "AnosCiclos")]
     internal class CycleYear : SchoolEntity
     {
-        public CycleYear()
-        {
-            
-        }
-        
+        public CycleYear() {}
 
         public CycleYear(int year, CycleCode cycleCode, ClassType classType)
+            : this()
         {
             Year = year;
             CycleCode = cycleCode;
@@ -25,21 +22,56 @@ namespace School_Survey_Timetabling.Model
         [Column(IsDbGenerated = true, IsPrimaryKey = true)]
         private long Id { get; set; }
 
+        private int _year;
         [Column(Name = "Ano")]
-        public int Year { get; set; }
+        public int Year
+        {
+            get { return _year; }
+            set
+            {
+                Contract.Requires<ArgumentOutOfRangeException>(value > 0, "Ano deve ser um número maior que zero.");
+                _year = value;
+                OnPropertyChanged("Ano");
+            }
+        }
 
+        private CycleCode _cycleCode;
         [Column(Name = "Ciclo")]
-        public CycleCode CycleCode { get; set; }
+        public CycleCode CycleCode
+        {
+            get { return _cycleCode; }
+            set
+            {
+                Contract.Requires<ArgumentOutOfRangeException>(Enum.IsDefined(typeof(CycleCode), value));
+                _cycleCode = value;
+                OnPropertyChanged("CycleCode");
+            }
+        }
 
+        private ClassType _classType;
         [Column(Name = "Tipo")]
-        public ClassType ClassType { get; set; }
+        public ClassType ClassType
+        {
+            get { return _classType; }
+            set
+            {
+                Contract.Requires<ArgumentOutOfRangeException>(Enum.IsDefined(typeof(ClassType), value));
+                _classType = value;
+                OnPropertyChanged("ClassType");
+            }
+        }
 
         private EntityRef<Class> _class;
         [Association(OtherKey = "Id", Storage = "_class")]
         public Class Class
         {
             get { return _class.Entity; }
-            set { _class.Entity = value; }
+            set
+            {
+                Contract.Requires<ArgumentNullException>(value != null);
+                _class.Entity = value;
+                OnPropertyChanged("Class");
+            }
         }
 
         public override string ToString()
