@@ -18,7 +18,7 @@ namespace School_Survey_Timetabling.Model
     internal abstract class Employee
     {
         [Column(IsDbGenerated = true, IsPrimaryKey = true)]
-        private long Id { get; set; }
+        private int Id { get; set; }
 
         [Column(Name = "Nome")]
         public string Name { get; set; }

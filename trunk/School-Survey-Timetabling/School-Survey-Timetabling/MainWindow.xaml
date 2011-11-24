@@ -50,7 +50,8 @@
             </ribbon:RibbonTab>
             <ribbon:RibbonTab Header="2o tab" Height="auto">
                 <ribbon:RibbonGroup Height="95">
-                    <ribbon:RibbonButton Label="Test"></ribbon:RibbonButton>
+                    <ribbon:RibbonButton Label="Test" Click="Buttonf_Click"></ribbon:RibbonButton>
+                    <ribbon:RibbonButton Label="CrazyTest" Click="Button2_Click"></ribbon:RibbonButton>
 
                 </ribbon:RibbonGroup>
             </ribbon:RibbonTab>

@@ -19,7 +19,7 @@ namespace School_Survey_Timetabling.Model
         private EntityRef<Discipline> _discipline;
 
         [Column(IsDbGenerated = true, IsPrimaryKey = true)]
-        private long Id { get; set; }
+        private int Id { get; set; }
 
         [Column(Name = "Inicio")]
         public DateTime Start { get; set; }

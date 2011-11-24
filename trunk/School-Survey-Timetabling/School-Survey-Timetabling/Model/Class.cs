@@ -1,7 +1,7 @@
-﻿using System.Data.Linq.Mapping;
+﻿using System.Data.Linq;
+using System.Data.Linq.Mapping;
 using Common;
 using System;
-using Extensions;
 using System.Diagnostics.Contracts;
 
 namespace School_Survey_Timetabling.Model
@@ -9,41 +9,43 @@ namespace School_Survey_Timetabling.Model
     [Table(Name = "Turmas")]
     internal class Class
     {
-        public Class(Shift shift, ClassType type, Room room)
+        public Class()
         {
-            Contract.Requires<ArgumentOutOfRangeException>(Enum.IsDefined(typeof(Shift), shift));
-            Contract.Requires<ArgumentOutOfRangeException>(Enum.IsDefined(typeof(ClassType), type));
-            Contract.Requires<ArgumentNullException>(room != null);
+            
+        }
+        public Class(Shift shift, Room room)
+        {
+            //Contract.Requires<ArgumentOutOfRangeException>(Enum.IsDefined(typeof(Shift), shift));
+            //Contract.Requires<ArgumentNullException>(room != null);
 
             Shift = shift;
-            ClassType = type;
             Room = room;
         }
 
         [Column(IsDbGenerated = true, IsPrimaryKey = true)]
-        private long Id { get; set; }
+        private int Id { get; set; }
 
         [Column(Name = "Turno")]
         public Shift Shift { get; set; }
 
-        [Column(Name = "Tipo")]
-        public ClassType ClassType { get; set; }
-
-        [Association(OtherKey = "Id")]
-        public CycleYear CycleYear { get; set; }
-
-        [Association(OtherKey = "Id")]
-        public Room Room { get; set; }
-
-        public string ShortCode
+        private EntityRef<CycleYear> _cycleYear;
+        [Association(OtherKey = "Id", Storage="_cycleYear")]
+        public CycleYear CycleYear
         {
-            get
-            {
-                return String.Format(ClassType == ClassType.Progression ? "{1}{0}{2}" : "{0}{1}{2}",
-                     ClassType.GetDescriptionOrDefault(), 
-                     CycleYear.CycleCode.GetDescriptionOrDefault(), 
-                     CycleYear.Year);
-            }
+            get { return _cycleYear.Entity; }
+            set { _cycleYear.Entity = value; }
         }
+
+        [Column(Name="Tipo")]
+        public ClassType Type { get; set; }
+
+        private EntityRef<Room> _room;
+        [Association(OtherKey = "Id", Storage="_room")]
+        public Room Room
+        {
+            get { return _room.Entity; }
+            set { _room.Entity = value; }
+        }
+        
     }
 }

@@ -29,13 +29,13 @@
     </Page.Resources>    
     <DockPanel>
         <StackPanel DockPanel.Dock="Left" Margin="10,0">
-            <ListBox Name="Rooms" ItemsSource="{Binding Rooms, Source={StaticResource Emef}}"/>                
-            <Button Content="Novo"/>
+            <ListBox Name="Rooms" ItemsSource="{Binding Path=Rooms, Source={StaticResource Emef}, UpdateSourceTrigger=PropertyChanged, NotifyOnSourceUpdated=True}" />                
+            <Button Content="Novo" Click="Button_Click" />
         </StackPanel>
         <StackPanel DockPanel.Dock="Right">
             <ContentPresenter Content="{Binding Path=SelectedItem, ElementName=Rooms}"/>                
             <StackPanel Orientation="Horizontal">
-                <Button Content="Salvar"/>
+                <Button Content="Salvar" Click="Button_Click_1" />
                 <Button Content="Cancelar"/>
             </StackPanel>
         </StackPanel>

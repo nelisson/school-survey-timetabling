@@ -4,6 +4,10 @@ namespace School_Survey_Timetabling.Model
 {
     internal class ShortBlock : Block
     {
+        public ShortBlock()
+        {
+            
+        }
         public ShortBlock(DateTime start, Discipline discipline)
         {
             Start = start;
