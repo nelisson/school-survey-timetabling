@@ -1,6 +1,8 @@
-﻿using System.ComponentModel;
+﻿using System;
+using System.ComponentModel;
 using System.Data.Linq;
 using System.Data.Linq.Mapping;
+using System.Diagnostics.Contracts;
 
 namespace School_Survey_Timetabling.Model
 {
@@ -18,6 +20,7 @@ namespace School_Survey_Timetabling.Model
             get { return _code; }
             set
             {
+                Contract.Requires<ArgumentNullException>(value != null);
                 _code = value;
                 OnPropertyChanged("Code");
             }
