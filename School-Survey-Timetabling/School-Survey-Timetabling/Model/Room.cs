@@ -5,7 +5,7 @@ using System.Data.Linq.Mapping;
 namespace School_Survey_Timetabling.Model
 {
     [Table(Name = "Salas")]
-    internal class Room : INotifyPropertyChanged
+    internal class Room : INotifyPropertyChanged, IDataErrorInfo
     {
         [Column(IsDbGenerated = true, IsPrimaryKey = true)]
         private int Id { get; set; }
@@ -40,6 +40,16 @@ namespace School_Survey_Timetabling.Model
         {
             if (PropertyChanged != null)
                 PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+        }
+
+        public string Error
+        {
+            get { throw new System.NotImplementedException(); }
+        }
+
+        public string this[string columnName]
+        {
+            get { throw new System.NotImplementedException(); }
         }
     }
 }
