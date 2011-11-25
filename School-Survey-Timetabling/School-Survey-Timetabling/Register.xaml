@@ -10,6 +10,7 @@
 	  d:DesignHeight="300" d:DesignWidth="300"
 	Title="Register">
 	<Page.Resources>
+        <model:EmefFatima x:Key="Emef"/>
         <BooleanToVisibilityConverter x:Key="boolToVis" />
         <converters:EnumDescriptionConverter x:Key="enumToDescription"/>
 
@@ -87,7 +88,7 @@
 				<ContentPresenter Content="{Binding Class}" Grid.Column="1" Grid.Row="1" />
 			</Grid>
 		</DataTemplate>
-		<model:EmefFatima x:Key="Emef"/>
+		
 
     </Page.Resources>
 	<DockPanel>
