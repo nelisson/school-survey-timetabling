@@ -12,7 +12,7 @@
     internal abstract partial class Employee : SchoolEntity
     {
         [Column(IsDbGenerated = true, IsPrimaryKey = true)]
-        private int Id { get; set; }
+        protected override long Id { get; set; }
 
         private string _name;
         [Column(Name = "Nome")]

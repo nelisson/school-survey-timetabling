@@ -9,6 +9,9 @@
     [Table(Name = "AnosCiclos")]
     internal class CycleYear : SchoolEntity
     {
+        [Column(IsDbGenerated = true, IsPrimaryKey = true)]
+        protected override long Id { get; set; }
+
         public CycleYear() {}
 
         public CycleYear(int year, CycleCode cycleCode, ClassType classType)
@@ -18,9 +21,6 @@
             CycleCode = cycleCode;
             ClassType = classType;
         }
-
-        [Column(IsDbGenerated = true, IsPrimaryKey = true)]
-        private long Id { get; set; }
 
         private int _year;
         [Column(Name = "Ano")]

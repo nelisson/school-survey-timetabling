@@ -9,7 +9,7 @@
     internal class Room : SchoolEntity
     {
         [Column(IsDbGenerated = true, IsPrimaryKey = true)]
-        private int Id { get; set; }
+        protected override long Id { get; set; }
 
         private string _code;
         [Column(Name = "Numero")]

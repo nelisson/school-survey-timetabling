@@ -19,9 +19,13 @@
 
         private void create_Click(object sender, RoutedEventArgs e)
         {
-            var room = new Room {Code = "E5", Class = new Class()};
-            room.Class.CycleYear = new CycleYear(2, CycleCode.A, ClassType.Progression);
+            var @class = new Class();
+            var room = new Room {Code = "E5", Class = @class};
+            var cycleYear = new CycleYear(2, CycleCode.A, ClassType.Progression);
+            room.Class.CycleYear = cycleYear;
             emef.ObservableRooms.Add(room);
+            emef.Classes.InsertOnSubmit(@class);
+            emef.CycleYears.InsertOnSubmit(cycleYear);
             Rooms.SelectedItem = room;
         }
 
