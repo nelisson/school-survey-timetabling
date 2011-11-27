@@ -9,6 +9,9 @@
     [Table(Name = "Turmas")]
     internal class Class : SchoolEntity
     {
+        [Column(IsDbGenerated = true, IsPrimaryKey = true)]
+        protected override long Id { get; set; }
+
         public Class() {}
 
         public Class(Shift shift, Room room) : this()
@@ -16,9 +19,6 @@
             Shift = shift;
             Room = room;
         }
-
-        [Column(IsDbGenerated = true, IsPrimaryKey = true)]
-        private int Id { get; set; }
 
         private Shift _shift;
 

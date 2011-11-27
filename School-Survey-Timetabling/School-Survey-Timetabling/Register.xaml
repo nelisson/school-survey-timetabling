@@ -84,8 +84,8 @@
 				<Label Content="Código" Grid.Column="0" Grid.Row="0"/>
 				<TextBox Style="{StaticResource textBoxInError}" Grid.Column="1" Grid.Row="0" 
 						 Text="{Binding Code, Mode=TwoWay, ValidatesOnExceptions=True}"/>
-				<Label Content="Turma" Grid.Column="0" Grid.Row="1"/>
-				<ContentPresenter Content="{Binding Class}" Grid.Column="1" Grid.Row="1" />
+				<ContentPresenter Content="{Binding Class}" Grid.Column="1" Grid.Row="1"
+                                  ContentTemplate="{StaticResource longClass}"/>
 			</Grid>
 		</DataTemplate>
 		

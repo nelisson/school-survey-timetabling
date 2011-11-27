@@ -8,7 +8,7 @@ using System.Linq;
 namespace School_Survey_Timetabling.Model
 {
     [Database(Name = "Escola")]
-    internal class EmefFatima : DataContext
+    internal sealed class EmefFatima : DataContext
     {
         private const string ConnectionString = "database.sdf";
 

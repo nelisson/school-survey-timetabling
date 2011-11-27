@@ -10,7 +10,7 @@
     internal class Discipline : SchoolEntity
     {
         [Column(IsDbGenerated = true, IsPrimaryKey = true)]
-        private int Id { get; set; }
+        protected override long Id { get; set; }
 
         [Column(Name = "CargaHoraria")]
         private DateTime SqlWorkload { get; set; }

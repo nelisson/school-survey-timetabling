@@ -12,7 +12,7 @@
     internal abstract partial class Block : SchoolEntity
     {
         [Column(IsDbGenerated = true, IsPrimaryKey = true)]
-        private int Id { get; set; }
+        protected override long Id { get; set; }
 
         private DateTime _start;
         [Column(Name = "Inicio")]
