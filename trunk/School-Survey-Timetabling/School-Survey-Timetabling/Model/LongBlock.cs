@@ -2,7 +2,7 @@
 {
     using System;
 
-    internal class LongBlock : Block
+    public class LongBlock : Block
     {
         public LongBlock() {}
 

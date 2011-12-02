@@ -8,24 +8,24 @@
     using System.Linq;
     using Extensions;
 
-    internal class Teacher : Employee
+    public class Teacher : Employee
     {
         public Teacher()
         {
             Role = EmployeeRole.Teacher;
-            _disciplines = new EntitySet<Discipline>();
+            _teacherDisciplines = new EntitySet<TeacherDiscipline>(e => { e.Teacher = this; }, e => { e.Teacher = null; });
         }
 
-        private readonly EntitySet<Discipline> _disciplines;
-        [Association(Storage = "_disciplines", OtherKey = "Id")]
-        public EntitySet<Discipline> Disciplines
+        private readonly EntitySet<TeacherDiscipline> _teacherDisciplines;
+        [Association(Storage = "_teacherDisciplines", OtherKey = "TeacherId", ThisKey="Id")]
+        public EntitySet<TeacherDiscipline> TeacherDisciplines
         {
-            get { return _disciplines; }
+            get { return _teacherDisciplines; }
             set
             {
                 Contract.Requires<ArgumentNullException>(value != null);
-                _disciplines.Assign(value);
-                OnPropertyChanged("Disciplines");
+                _teacherDisciplines.Assign(value);
+                OnPropertyChanged("TeacherDisciplines");
             }
         }
 
@@ -34,7 +34,39 @@
             Justification = "Required for code contracts.")]
         private void ObjectInvariant()
         {
-            Contract.Invariant(Disciplines.Select(d => d.Workload).Sum() <= Workload);
+            //Contract.Invariant(TeacherDisciplines.Select(d => d.Discipline.Workload).Sum() <= Workload);
+        }
+
+        private void OnDisciplinesAdd(Discipline entity)
+        {
+            TeacherDisciplines.Add(new TeacherDiscipline { Teacher = this, Discipline = entity });
+        }
+
+        private void OnDisciplinesRemove(Discipline entity)
+        {
+            var teacherDiscipline = TeacherDisciplines.FirstOrDefault(
+                c => c.TeacherId == Id
+                && c.DisciplineId == entity.Id);
+            TeacherDisciplines.Remove(teacherDiscipline);
+        }
+
+        private EntitySet<Discipline> _disciplines;
+
+        public EntitySet<Discipline> Disciplines
+        {
+            get
+            {
+                if (_disciplines == null)
+                {
+                    _disciplines = new EntitySet<Discipline>(OnDisciplinesAdd, OnDisciplinesRemove);
+                    _disciplines.SetSource(TeacherDisciplines.Select(c => c.Discipline));
+                }
+                return _disciplines;
+            }
+            set
+            {
+                _disciplines.Assign(value);
+            }
         }
     }
 }

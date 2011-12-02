@@ -75,6 +75,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="CycleYear.xaml.cs">
+      <DependentUpon>CycleYear.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Dayoff.xaml.cs">
       <DependentUpon>Dayoff.xaml</DependentUpon>
     </Compile>
@@ -82,6 +85,10 @@
     <Compile Include="Welcome.xaml.cs">
       <DependentUpon>Welcome.xaml</DependentUpon>
     </Compile>
+    <Page Include="CycleYear.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Dayoff.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

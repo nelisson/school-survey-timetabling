@@ -9,10 +9,10 @@
     [InheritanceMapping(Code = EmployeeRole.Administrator, Type = typeof (Administrator), IsDefault = true)]
     [InheritanceMapping(Code = EmployeeRole.Teacher, Type = typeof (Teacher))]
     [InheritanceMapping(Code = EmployeeRole.Volant, Type = typeof (Volant))]
-    internal abstract partial class Employee : SchoolEntity
+    public abstract partial class Employee : SchoolEntity
     {
         [Column(IsDbGenerated = true, IsPrimaryKey = true)]
-        protected override long Id { get; set; }
+        protected internal override long Id { get; set; }
 
         private string _name;
         [Column(Name = "Nome")]

@@ -9,10 +9,22 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SouthernLapwing", "Southern
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Common", "Common\Common.csproj", "{1B0E12A2-9C50-42AF-BC25-1054528A63A2}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SchoolTests", "SchoolTests\SchoolTests.csproj", "{3E7D7B10-B25B-453B-8374-E3CC35AA4D53}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{F4809263-97B2-4015-B3EF-807BB42BFA6D}"
+	ProjectSection(SolutionItems) = preProject
+		Local.testsettings = Local.testsettings
+		School-Survey-Timetabling.vsmdi = School-Survey-Timetabling.vsmdi
+		TraceAndTestImpact.testsettings = TraceAndTestImpact.testsettings
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SubversionScc) = preSolution
 		Svn-Managed = True
 		Manager = AnkhSVN - Subversion Support for Visual Studio
+	EndGlobalSection
+	GlobalSection(TestCaseManagementSettings) = postSolution
+		CategoryFile = School-Survey-Timetabling.vsmdi
 	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -86,6 +98,21 @@ Global
 		{1B0E12A2-9C50-42AF-BC25-1054528A63A2}.VerifyContracts|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{1B0E12A2-9C50-42AF-BC25-1054528A63A2}.VerifyContracts|Mixed Platforms.Build.0 = Release|Any CPU
 		{1B0E12A2-9C50-42AF-BC25-1054528A63A2}.VerifyContracts|x86.ActiveCfg = Release|Any CPU
+		{3E7D7B10-B25B-453B-8374-E3CC35AA4D53}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3E7D7B10-B25B-453B-8374-E3CC35AA4D53}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3E7D7B10-B25B-453B-8374-E3CC35AA4D53}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{3E7D7B10-B25B-453B-8374-E3CC35AA4D53}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{3E7D7B10-B25B-453B-8374-E3CC35AA4D53}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{3E7D7B10-B25B-453B-8374-E3CC35AA4D53}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3E7D7B10-B25B-453B-8374-E3CC35AA4D53}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3E7D7B10-B25B-453B-8374-E3CC35AA4D53}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{3E7D7B10-B25B-453B-8374-E3CC35AA4D53}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{3E7D7B10-B25B-453B-8374-E3CC35AA4D53}.Release|x86.ActiveCfg = Release|Any CPU
+		{3E7D7B10-B25B-453B-8374-E3CC35AA4D53}.VerifyContracts|Any CPU.ActiveCfg = Release|Any CPU
+		{3E7D7B10-B25B-453B-8374-E3CC35AA4D53}.VerifyContracts|Any CPU.Build.0 = Release|Any CPU
+		{3E7D7B10-B25B-453B-8374-E3CC35AA4D53}.VerifyContracts|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{3E7D7B10-B25B-453B-8374-E3CC35AA4D53}.VerifyContracts|Mixed Platforms.Build.0 = Release|Any CPU
+		{3E7D7B10-B25B-453B-8374-E3CC35AA4D53}.VerifyContracts|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

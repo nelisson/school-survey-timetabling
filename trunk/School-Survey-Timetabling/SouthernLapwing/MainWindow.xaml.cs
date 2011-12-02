@@ -30,7 +30,7 @@ namespace SouthernLapwing
 
         public MainWindow()
         {
-            InitializeComponent();            
+            InitializeComponent();
         }
 
         public MainWindow(string email, string name) : this()
@@ -44,7 +44,7 @@ namespace SouthernLapwing
 
             if (!InputIsValid())
             {
-                MessageBox.Show("Existem conflitos na tabela","ERRO",MessageBoxButton.OK,MessageBoxImage.Error);
+                MessageBox.Show("Existem conflitos na tabela", "ERRO", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
 
@@ -83,7 +83,7 @@ namespace SouthernLapwing
 
         private bool InputIsValid()
         {
-            return !GridDays.Children.OfType<Label>().Any(l => l.Background == ErrorColor); 
+            return !GridDays.Children.OfType<Label>().Any(l => l.Background == ErrorColor);
         }
 
         private void ClientSendCompleted(object sender, AsyncCompletedEventArgs e)
@@ -101,14 +101,14 @@ namespace SouthernLapwing
             var days = GridDays.Children
                 .OfType<Label>()
                 .Where(l => l.DataContext != null)
-                .Select(l => new {Alternative = l.DataContext as Alternative, Label = l})
+                .Select(l => new { Alternative = l.DataContext as Alternative, Label = l })
                 .ToLookup(item => item.Alternative.Priority);
 
             foreach (var alternative in days.Where(d => d.Count() > 1).SelectMany(group => group.ToList()))
             {
                 alternative.Label.Background = ErrorColor;
             }
-            
+
             foreach (var alternative in days.Where(d => d.Count() == 1).SelectMany(group => group.ToList()))
             {
                 alternative.Label.Background = OkColor;

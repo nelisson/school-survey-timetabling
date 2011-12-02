@@ -16,7 +16,7 @@
       <ribbon:RibbonTab Header="Home">
         <ribbon:RibbonGroup x:Name="Options" Header="Opções" x:FieldModifier="private">
                     <ribbon:RibbonButton LargeImageSource="Images\mail.png" Label="Enviar"
-                               Click="ButtonSendClick" />
+                               />
           <ribbon:RibbonButton LargeImageSource="Images\refresh.png" Label="Atualizar" />
         </ribbon:RibbonGroup>
 
@@ -25,6 +25,7 @@
     <extToolkit:BusyIndicator Grid.Row="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
                               Name="busyIndicator" BusyContent="Enviando..." x:FieldModifier="private">
             <Border Margin="5" BorderThickness="1" BorderBrush="LightSkyBlue">
+                
                 <Grid VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto" />

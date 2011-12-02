@@ -1,12 +1,7 @@
 ﻿using System;
 using System.Diagnostics.Contracts;
-using System.Linq;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Media;
 using School_Survey_Timetabling.Model;
-using System.Collections.Generic;
-using Extensions;
 
 namespace School_Survey_Timetabling
 {
