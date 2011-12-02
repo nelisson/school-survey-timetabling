@@ -7,10 +7,10 @@
     using System.Diagnostics.Contracts;
 
     [Table(Name = "Turmas")]
-    internal class Class : SchoolEntity
+    public class Class : SchoolEntity
     {
         [Column(IsDbGenerated = true, IsPrimaryKey = true)]
-        protected override long Id { get; set; }
+        protected internal override long Id { get; set; }
 
         public Class() {}
 

@@ -6,10 +6,10 @@
     using System.Diagnostics.Contracts;
 
     [Table(Name = "Salas")]
-    internal class Room : SchoolEntity
+    public class Room : SchoolEntity
     {
         [Column(IsDbGenerated = true, IsPrimaryKey = true)]
-        protected override long Id { get; set; }
+        protected internal override long Id { get; set; }
 
         private string _code;
         [Column(Name = "Numero")]

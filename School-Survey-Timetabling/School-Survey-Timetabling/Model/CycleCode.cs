@@ -5,7 +5,7 @@ using System.Text;
 
 namespace School_Survey_Timetabling.Model
 {
-    internal enum CycleCode
+    public enum CycleCode
     {
         A,
         B,

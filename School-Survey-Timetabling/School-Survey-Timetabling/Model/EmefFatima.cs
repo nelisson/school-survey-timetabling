@@ -8,7 +8,7 @@ using System.Linq;
 namespace School_Survey_Timetabling.Model
 {
     [Database(Name = "Escola")]
-    internal sealed class EmefFatima : DataContext
+    public sealed class EmefFatima : DataContext
     {
         private const string ConnectionString = "database.sdf";
 
@@ -65,8 +65,12 @@ namespace School_Survey_Timetabling.Model
         {
             get { return GetTable<Room>(); }
         }
+        
+        private Table<TeacherDiscipline> TeacherDisplines
+        {
+            get { return GetTable<TeacherDiscipline>(); }
+        }
 
         public ObservableCollection<Room> ObservableRooms { get; private set; }
-        //public ObservableCollection<Room> ObservableRooms { get; private set; }
     }
 }

@@ -9,10 +9,10 @@
     [Table(Name = "Blocos")]
     [InheritanceMapping(Code = BlockLength.Short, Type = typeof (ShortBlock), IsDefault = true)]
     [InheritanceMapping(Code = BlockLength.Long, Type = typeof (LongBlock))]
-    internal abstract partial class Block : SchoolEntity
+    public abstract partial class Block : SchoolEntity
     {
         [Column(IsDbGenerated = true, IsPrimaryKey = true)]
-        protected override long Id { get; set; }
+        protected internal override long Id { get; set; }
 
         private DateTime _start;
         [Column(Name = "Inicio")]

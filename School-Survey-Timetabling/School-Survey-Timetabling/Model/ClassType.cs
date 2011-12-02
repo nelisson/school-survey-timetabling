@@ -2,7 +2,7 @@
 {
     using System.ComponentModel;
 
-    internal enum ClassType
+    public enum ClassType
     {
         [Description("")]
         Normal,

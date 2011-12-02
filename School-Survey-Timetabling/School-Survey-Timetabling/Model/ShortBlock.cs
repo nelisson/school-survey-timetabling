@@ -2,7 +2,7 @@
 {
     using System;
 
-    internal class ShortBlock : Block
+    public class ShortBlock : Block
     {
         public ShortBlock() {}
 

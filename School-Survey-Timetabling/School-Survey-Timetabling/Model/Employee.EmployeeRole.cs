@@ -1,6 +1,6 @@
 ﻿namespace School_Survey_Timetabling.Model
 {
-    internal abstract partial class Employee : SchoolEntity
+    public abstract partial class Employee : SchoolEntity
     {
         protected enum EmployeeRole
         {

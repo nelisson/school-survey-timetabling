@@ -7,10 +7,10 @@
     using Extensions;
 
     [Table(Name = "AnosCiclos")]
-    internal class CycleYear : SchoolEntity
+    public class CycleYear : SchoolEntity
     {
         [Column(IsDbGenerated = true, IsPrimaryKey = true)]
-        protected override long Id { get; set; }
+        protected internal override long Id { get; set; }
 
         public CycleYear() {}
 

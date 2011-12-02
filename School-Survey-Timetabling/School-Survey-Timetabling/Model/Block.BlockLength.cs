@@ -1,6 +1,6 @@
 ﻿namespace School_Survey_Timetabling.Model
 {
-    internal abstract partial class Block : SchoolEntity
+    public abstract partial class Block : SchoolEntity
     {
         protected enum BlockLength
         {
