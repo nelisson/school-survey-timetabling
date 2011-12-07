@@ -96,6 +96,9 @@
     <CodeAnalysisIgnoreBuiltInRules>false</CodeAnalysisIgnoreBuiltInRules>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="ILOG.CP">
+      <HintPath>..\..\..\..\..\..\..\ILOG\CPOptimizer23\bin\x64_win64\ILOG.CP.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTestFramework, Version=10.1.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -127,9 +130,12 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Model\AssociatedSchoolEntity.cs" />
     <Compile Include="Model\Block.BlockLength.cs">
       <DependentUpon>Block.cs</DependentUpon>
     </Compile>
+    <Compile Include="Model\CycleYearDiscipline.cs" />
+    <Compile Include="Model\DualAssociation.cs" />
     <Compile Include="Model\Employee.EmployeeRole.cs">
       <DependentUpon>Employee.cs</DependentUpon>
     </Compile>
