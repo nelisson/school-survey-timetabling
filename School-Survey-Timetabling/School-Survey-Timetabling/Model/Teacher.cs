@@ -10,12 +10,20 @@
 
     public class Teacher : Employee
     {
-        public Teacher()
+        public Teacher() : base()
         {
             Role = EmployeeRole.Teacher;
-            _teacherDisciplines = new EntitySet<TeacherDiscipline>(e => { e.Teacher = this; }, e => { e.Teacher = null; });
+            //_teacherDisciplines = new EntitySet<TeacherDiscipline>(e => { e.Teacher = this; }, e => { e.Teacher = null; });
         }
 
+        [Association(Name = "TeacherDiscipline", Storage = "_association", OtherKey = "IdFirst", ThisKey = "Id")]
+        protected internal override EntitySet<DualAssociation<Employee, Discipline>> Association
+        {
+            get { return base.Association; }
+            set { base.Association = value; }
+        }
+
+        /*
         private readonly EntitySet<TeacherDiscipline> _teacherDisciplines;
         [Association(Storage = "_teacherDisciplines", OtherKey = "TeacherId", ThisKey="Id")]
         public EntitySet<TeacherDiscipline> TeacherDisciplines
@@ -28,6 +36,7 @@
                 OnPropertyChanged("TeacherDisciplines");
             }
         }
+        */
 
         [ContractInvariantMethod]
         [SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic",
@@ -39,15 +48,15 @@
 
         private void OnDisciplinesAdd(Discipline entity)
         {
-            TeacherDisciplines.Add(new TeacherDiscipline { Teacher = this, Discipline = entity });
+            Association.Add(new TeacherDiscipline { First = this, Second = entity });
         }
 
         private void OnDisciplinesRemove(Discipline entity)
         {
-            var teacherDiscipline = TeacherDisciplines.FirstOrDefault(
-                c => c.TeacherId == Id
-                && c.DisciplineId == entity.Id);
-            TeacherDisciplines.Remove(teacherDiscipline);
+            var teacherDiscipline = Association.FirstOrDefault(
+                c => c.IdSecond == Id
+                && c.IdFirst == entity.Id);
+            Association.Remove(teacherDiscipline);
         }
 
         private EntitySet<Discipline> _disciplines;
@@ -59,7 +68,7 @@
                 if (_disciplines == null)
                 {
                     _disciplines = new EntitySet<Discipline>(OnDisciplinesAdd, OnDisciplinesRemove);
-                    _disciplines.SetSource(TeacherDisciplines.Select(c => c.Discipline));
+                    _disciplines.SetSource(Association.Select(c => c.Second/*Discipline*/));
                 }
                 return _disciplines;
             }

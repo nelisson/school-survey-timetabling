@@ -4,8 +4,9 @@ using System.Data.Linq.Mapping;
 namespace School_Survey_Timetabling.Model
 {
     [Table(Name="ProfessorDisciplina")]
-    public class TeacherDiscipline
+    public class TeacherDiscipline : DualAssociation<Employee, Discipline>
     {
+        /*
         [Column(IsPrimaryKey=true)]
         public long TeacherId { get; set; }
         [Column(IsPrimaryKey = true)]
@@ -75,5 +76,12 @@ namespace School_Survey_Timetabling.Model
                 }
             }
         }
+         * */
+
+        [Column(Name = "TeacherId", IsPrimaryKey = true)]
+        protected internal override long IdFirst { get; set; }
+
+        [Column(Name = "DiscplineId", IsPrimaryKey = true)]
+        protected internal override long IdSecond { get; set; }
     }
 }

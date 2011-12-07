@@ -9,12 +9,12 @@ namespace School_Survey_Timetabling.Model
     using System.Diagnostics.Contracts;
 
     [Table(Name = "Disciplinas")]
-    public class Discipline : SchoolEntity
+    public class Discipline : AssociatedSchoolEntity<Employee, Discipline>
     {
-
-        public Discipline()
+        public Discipline() : base(false)
         {
-            _teacherDisciplines = new EntitySet<TeacherDiscipline>(e => { e.Discipline = this; }, e => { e.Discipline = null; });
+            //_teacherDisciplines = new EntitySet<TeacherDiscipline>(e => { e.Discipline = this; }, e => { e.Discipline = null; });
+            _blocks = new EntitySet<Block>();
         }
 
         [Column(IsDbGenerated = true, IsPrimaryKey = true)]
@@ -47,19 +47,20 @@ namespace School_Survey_Timetabling.Model
             }
         }
 
-        private EntityRef<Block> _block;
-        [Association(OtherKey = "Id", Storage = "_block")]
-        public Block Block
+        private EntitySet<Block> _blocks;
+        [Association(OtherKey = "Id", Storage = "_blocks")]
+        public EntitySet<Block> Blocks
         {
-            get { return _block.Entity; }
+            get { return _blocks; }
             set
             {
                 Contract.Requires<ArgumentNullException>(value != null);
-                _block.Entity = value;
-                OnPropertyChanged("Block");
+                _blocks.Assign(value);
+                OnPropertyChanged("Blocks");
             }
         }
 
+        /*
         private readonly EntitySet<TeacherDiscipline> _teacherDisciplines;
         [Association(Storage = "_teacherDisciplines", OtherKey = "DisciplineId", ThisKey="Id")]
         public EntitySet<TeacherDiscipline> TeacherDisciplines
@@ -72,30 +73,31 @@ namespace School_Survey_Timetabling.Model
                 OnPropertyChanged("TeacherDisciplines");
             }
         }
+        */
 
-        private void OnTeachersAdd(Teacher entity)
+        private void OnTeachersAdd(Employee entity)
         {
-            TeacherDisciplines.Add(new TeacherDiscipline { Discipline = this, Teacher = entity });
+            Association.Add(new TeacherDiscipline { Second = this, First = entity });
         }
 
-        private void OnTeachersRemove(Teacher entity)
+        private void OnTeachersRemove(Employee entity)
         {
-            var teacherDiscipline = TeacherDisciplines.FirstOrDefault(
-                c => c.DisciplineId == Id
-                && c.TeacherId == entity.Id);
-            TeacherDisciplines.Remove(teacherDiscipline);
+            var teacherDiscipline = Association.FirstOrDefault(
+                c => c.IdSecond == Id
+                && c.IdFirst == entity.Id);
+            Association.Remove(teacherDiscipline);
         }
 
-        private EntitySet<Teacher> _teachers;
+        private EntitySet<Employee> _teachers;
 
-        public EntitySet<Teacher> Teachers
+        public EntitySet<Employee> Teachers
         {
             get
             {
                 if (_teachers == null)
                 {
-                    _teachers = new EntitySet<Teacher>(OnTeachersAdd, OnTeachersRemove);
-                    _teachers.SetSource(TeacherDisciplines.Select(c => c.Teacher));
+                    _teachers = new EntitySet<Employee>(OnTeachersAdd, OnTeachersRemove);
+                    _teachers.SetSource(Association.Select(c => c.First));
                 }
                 return _teachers;
             }
