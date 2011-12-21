@@ -6,7 +6,6 @@ namespace Common
     {
         public Alternative(Alternative alternative)
         {
-            Priority = alternative.Priority;
             DayOfWeek = alternative.DayOfWeek;
             Shift = alternative.Shift;
         }
@@ -15,7 +14,6 @@ namespace Common
         {
         }
 
-        public int Priority { get; set; }
         public DayOfWeek DayOfWeek { get; set; }
         public Shift Shift { get; set; }
     }

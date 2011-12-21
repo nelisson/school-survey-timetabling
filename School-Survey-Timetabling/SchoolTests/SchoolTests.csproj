@@ -34,7 +34,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="ILOG.CP">
-      <HintPath>..\..\..\..\..\..\..\ILOG\CPOptimizer23\bin\x64_win64\ILOG.CP.dll</HintPath>
+      <HintPath>..\..\..\..\..\..\..\..\Program Files\IBM\ILOG\CPLEX_Studio_Academic123\cpoptimizer\bin\x64_win64\ILOG.CP.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTestFramework, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
     <Reference Include="System" />

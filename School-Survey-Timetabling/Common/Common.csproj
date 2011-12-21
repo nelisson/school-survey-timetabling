@@ -31,6 +31,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -45,11 +46,13 @@
   <ItemGroup>
     <Compile Include="Alternative.cs" />
     <Compile Include="Converters\EnumDescriptionConverter.cs" />
+    <Compile Include="Converters\IndexToVisibility.cs" />
     <Compile Include="MarkupExtensions\EnumValuesExtension.cs" />
     <Compile Include="Shift.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TeacherChoice.cs" />
     <Compile Include="ValidationRules\InRangeRule.cs" />
+    <Compile Include="ValidationRules\NotNullOrEmptyRule.cs" />
     <Compile Include="ValidationRules\NotNullRule.cs" />
     <Compile Include="ValidationRules\RegExRule.cs" />
   </ItemGroup>

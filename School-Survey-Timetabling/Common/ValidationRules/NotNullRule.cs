@@ -6,7 +6,7 @@
     /// <summary>
     /// Checks if a value is not null.
     /// </summary>
-    class NotNullRule : ValidationRule
+    public class NotNullRule : ValidationRule
     {
         public override ValidationResult Validate(object value, CultureInfo cultureInfo)
         {
