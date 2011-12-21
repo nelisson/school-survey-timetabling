@@ -1,8 +1,11 @@
 ﻿<Window x:Class="SouthernLapwing.Welcome"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"        
-        Title="Welcome" Height="400" Width="400">
-    
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"    
+        xmlns:validator="clr-namespace:Common.ValidationRules;assembly=Common"
+        Title="Welcome" Height="400" Width="400" ResizeMode="NoResize" 
+        DataContext="{Binding RelativeSource={RelativeSource Self}}"
+        FocusManager.FocusedElement="{Binding ElementName=TextBoxFullName}">   
+        
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition />
@@ -13,24 +16,39 @@
 
         <Border Grid.Row="0" Style="{StaticResource ResourceKey=BorderStyle}" >
             <Label VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="36">Quero-Quero</Label>
-        </Border>
-        <Border Grid.Row="1" Style="{StaticResource ResourceKey=BorderStyle}">
-            <DockPanel LastChildFill="False">
-                <Image DockPanel.Dock="Left" Source="Images\email1_128x128.png" />
-                <Line Style="{StaticResource ResourceKey=LineStyle}" Margin="7,0"/>
-                <Label DockPanel.Dock="Top" Content="Email:" Padding="0,5" FontSize="14" />
-                <TextBox DockPanel.Dock="Top" Margin="0,0,7,0" Name="TextBoxEmail"/>
-            </DockPanel>
-        </Border>
-        <Border Grid.Row="2" Style="{StaticResource ResourceKey=BorderStyle}" >
+        </Border>        
+        <Border Grid.Row="1" Style="{StaticResource ResourceKey=BorderStyle}" >
             <DockPanel LastChildFill="False">
                 <Image DockPanel.Dock="Left" Source="Images\user2_128x128.png"></Image>
                 <Line Style="{StaticResource ResourceKey=LineStyle}" Margin="7,0"/>
                 <Label DockPanel.Dock="Top" Content="Nome Completo:" Padding="0,5" FontSize="14" />
-                <TextBox DockPanel.Dock="Top" Margin="0,0,7,0" Name="TextBoxFullName"/>
+                <TextBox DockPanel.Dock="Top" Margin="0,0,7,0" Name="TextBoxFullName">
+                    <Binding Path="FullName" UpdateSourceTrigger="PropertyChanged">
+                        <Binding.ValidationRules>
+                            <validator:NotNullOrEmptyRule ValidatesOnTargetUpdated="True"/>
+                        </Binding.ValidationRules>
+                    </Binding>
+                </TextBox>
             </DockPanel>
         </Border>
-        
-        <Button Grid.Row="3" Content="Ok" HorizontalAlignment="Center" Width="100" Click="ButtonClick" />        
+        <Border Grid.Row="2" Style="{StaticResource ResourceKey=BorderStyle}">
+            <DockPanel LastChildFill="False">
+                <Image DockPanel.Dock="Left" Source="Images\email1_128x128.png" />
+                <Line Style="{StaticResource ResourceKey=LineStyle}" Margin="7,0"/>
+                <Label DockPanel.Dock="Top" Content="Email:" Padding="0,5" FontSize="14" />
+                <TextBox DockPanel.Dock="Top" Margin="0,0,7,0" Name="TextBoxEmail">
+                    <Binding Path="Email" UpdateSourceTrigger="PropertyChanged">
+                        <Binding.ValidationRules>
+                            <validator:NotNullOrEmptyRule ValidatesOnTargetUpdated="True"/>
+                        </Binding.ValidationRules>
+                    </Binding>
+                </TextBox>
+            </DockPanel>
+        </Border>
+        <Button Grid.Row="3" Content="Ok" HorizontalAlignment="Center" Width="100" Command="Save" IsDefault="True">
+            <Button.CommandBindings>
+                <CommandBinding Command="Save" CanExecute="CommandBindingCanExecute" Executed="CommandBindingExecuted" />
+            </Button.CommandBindings>
+        </Button>
     </Grid>
 </Window>

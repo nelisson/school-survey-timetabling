@@ -4,102 +4,114 @@
                      xmlns:ribbon="clr-namespace:Microsoft.Windows.Controls.Ribbon;assembly=RibbonControlsLibrary"
                      xmlns:extToolkit="http://schemas.microsoft.com/winfx/2006/xaml/presentation/toolkit/extended" 
                      Title="Quero-Quero"
-                     x:Name="RibbonWindow" Icon="Images\quero.png" Width="640" Height="480">
+                     x:Name="RibbonWindow" Icon="Images\quero.png" Width="800" Height="480" xmlns:my="clr-namespace:Common.Converters;assembly=Common">
+    <ribbon:RibbonWindow.Resources>
+        <my:IndexToVisibility x:Key="IndexToVisibility" />
+    </ribbon:RibbonWindow.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
 
-  <Grid>
-    <Grid.RowDefinitions>
-      <RowDefinition Height="Auto" />
-      <RowDefinition Height="*" />
-    </Grid.RowDefinitions>
+        <ribbon:Ribbon>
+            <ribbon:RibbonTab Header="Home">
+                <ribbon:RibbonGroup x:Name="Options" Header="Opções" x:FieldModifier="private">
+                    <ribbon:RibbonButton LargeImageSource="Images\mail.png" Label="Enviar"  Click="ButtonSendClick"/>
+                    <ribbon:RibbonButton LargeImageSource="Images\refresh.png" Label="Atualizar" />
 
-    <ribbon:Ribbon>      
-      <ribbon:RibbonTab Header="Home">
-        <ribbon:RibbonGroup x:Name="Options" Header="Opções" x:FieldModifier="private">
-                    <ribbon:RibbonButton LargeImageSource="Images\mail.png" Label="Enviar"
-                               />
-          <ribbon:RibbonButton LargeImageSource="Images\refresh.png" Label="Atualizar" />
-        </ribbon:RibbonGroup>
-
-      </ribbon:RibbonTab>
-    </ribbon:Ribbon>
-    <extToolkit:BusyIndicator Grid.Row="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+                </ribbon:RibbonGroup>
+            </ribbon:RibbonTab>
+        </ribbon:Ribbon>
+        <extToolkit:BusyIndicator Grid.Row="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
                               Name="busyIndicator" BusyContent="Enviando..." x:FieldModifier="private">
             <Border Margin="5" BorderThickness="1" BorderBrush="LightSkyBlue">
-                
-                <Grid VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition />
-                        <RowDefinition />
-                    </Grid.RowDefinitions>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="Auto" />
-                        <ColumnDefinition />
-                        <ColumnDefinition />
-                        <ColumnDefinition />
-                        <ColumnDefinition />
-                        <ColumnDefinition />
-                    </Grid.ColumnDefinitions>
-
-                    <GridSplitter Style="{StaticResource ResourceKey=VerticalGridSplitterStyle}" Grid.Column="0" />
-                    <GridSplitter Style="{StaticResource ResourceKey=VerticalGridSplitterStyle}" Grid.Column="1" />
-                    <GridSplitter Style="{StaticResource ResourceKey=VerticalGridSplitterStyle}" Grid.Column="2" />
-                    <GridSplitter Style="{StaticResource ResourceKey=VerticalGridSplitterStyle}" Grid.Column="3" />
-                    <GridSplitter Style="{StaticResource ResourceKey=VerticalGridSplitterStyle}" Grid.Column="4" />
-
-                    <GridSplitter Style="{StaticResource ResourceKey=HorizontalGridSplitterStyle}" Grid.Row="0"
-                        HorizontalAlignment="Stretch" />
-                    <GridSplitter Style="{StaticResource ResourceKey=HorizontalGridSplitterStyle}" Grid.Row="1"
-                        HorizontalAlignment="Stretch" />
-
-                    <Label Grid.Column="0" Content="Turno" HorizontalAlignment="Center" />
-                    <Label Grid.Column="1" Content="Segunda" HorizontalAlignment="Center" />
-                    <Label Grid.Column="2" Content="Terça" HorizontalAlignment="Center" />
-                    <Label Grid.Column="3" Content="Quarta" HorizontalAlignment="Center" />
-                    <Label Grid.Column="4" Content="Quinta" HorizontalAlignment="Center" />
-                    <Label Grid.Column="5" Content="Sexta" HorizontalAlignment="Center" />
-
-                    <ItemsControl Grid.Row="1" ItemsSource="Manhã" HorizontalAlignment="Center"
-                        VerticalAlignment="Center" />
-                    <ItemsControl Grid.Row="2" ItemsSource="Tarde" HorizontalAlignment="Center"
-                        VerticalAlignment="Center" />
-
-                    <Grid Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="5" Grid.RowSpan="2" Name="GridDays"
-                x:FieldModifier="private">
+                <DockPanel >
+                    <UniformGrid DockPanel.Dock="Right" Width="125" Margin="2,0,0,0" Rows="4">
+                        <StackPanel Grid.Row="0" MaxWidth="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=Grid, AncestorLevel=1}, Path=ActualWidth}">
+                            <Label>1ª Opção</Label>
+                            <ComboBox VerticalAlignment="Top" x:Name="FirstOption">
+                                <ComboBoxItem></ComboBoxItem>
+                                <ComboBoxItem>A</ComboBoxItem>
+                            </ComboBox>
+                        </StackPanel>
+                        <StackPanel Grid.Row="1" Visibility="{Binding ElementName=FirstOption, Path=SelectedIndex, Converter={StaticResource IndexToVisibility}}">
+                            <Label>2ª Opção</Label>
+                            <ComboBox VerticalAlignment="Top" x:Name="SecondOption"/>
+                        </StackPanel>
+                        <StackPanel Grid.Row="2" Visibility="{Binding ElementName=SecondOption
+                            , Path=SelectedIndex, Converter={StaticResource IndexToVisibility}}">
+                            <Label>3ª Opção</Label>
+                            <ComboBox VerticalAlignment="Top" x:Name="thrirdOption"/>
+                        </StackPanel>
+                        <StackPanel Grid.Row="3">
+                            <CheckBox x:Name="SpecialLicense">Licença especial</CheckBox>
+                            <ComboBox SelectedIndex="0" IsEnabled="{Binding ElementName=SpecialLicense, Path=IsChecked}">
+                                <ComboBoxItem>Licença Gestante</ComboBoxItem>
+                                <ComboBoxItem>Licença Prêmio</ComboBoxItem>
+                                <ComboBoxItem>Licença Aguardando Aposentaria</ComboBoxItem>
+                            </ComboBox>
+                        </StackPanel>
+                    </UniformGrid>
+                    <Label DockPanel.Dock="Top" HorizontalAlignment="Center" FontSize="16">Folga</Label>
+                    <Grid DockPanel.Dock="Top" VerticalAlignment="Stretch" HorizontalAlignment="Left" Width="640" >
                         <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
                             <RowDefinition />
                             <RowDefinition />
                         </Grid.RowDefinitions>
                         <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" />
                             <ColumnDefinition />
                             <ColumnDefinition />
                             <ColumnDefinition />
                             <ColumnDefinition />
                             <ColumnDefinition />
                         </Grid.ColumnDefinitions>
-                        <Label Style="{StaticResource ResourceKey=LabelDayStyle}" Grid.Row="0" Grid.Column="0"
-                   DataContextChanged="LabelDataContextChanged" />
-                        <Label Style="{StaticResource ResourceKey=LabelDayStyle}" Grid.Row="0" Grid.Column="1"
-                   DataContextChanged="LabelDataContextChanged" />
-                        <Label Style="{StaticResource ResourceKey=LabelDayStyle}" Grid.Row="0" Grid.Column="2"
-                   DataContextChanged="LabelDataContextChanged" />
-                        <Label Style="{StaticResource ResourceKey=LabelDayStyle}" Grid.Row="0" Grid.Column="3"
-                   DataContextChanged="LabelDataContextChanged" />
-                        <Label Style="{StaticResource ResourceKey=LabelDayStyle}" Grid.Row="0" Grid.Column="4"
-                   DataContextChanged="LabelDataContextChanged" />
-                        <Label Style="{StaticResource ResourceKey=LabelDayStyle}" Grid.Row="1" Grid.Column="0"
-                   DataContextChanged="LabelDataContextChanged" />
-                        <Label Style="{StaticResource ResourceKey=LabelDayStyle}" Grid.Row="1" Grid.Column="1"
-                   DataContextChanged="LabelDataContextChanged" />
-                        <Label Style="{StaticResource ResourceKey=LabelDayStyle}" Grid.Row="1" Grid.Column="2"
-                   DataContextChanged="LabelDataContextChanged" />
-                        <Label Style="{StaticResource ResourceKey=LabelDayStyle}" Grid.Row="1" Grid.Column="3"
-                   DataContextChanged="LabelDataContextChanged" />
-                        <Label Style="{StaticResource ResourceKey=LabelDayStyle}" Grid.Row="1" Grid.Column="4"
-                   DataContextChanged="LabelDataContextChanged" />
+
+                        <GridSplitter Style="{StaticResource ResourceKey=VerticalGridSplitterStyle}" Grid.Column="0" />
+                        <GridSplitter Style="{StaticResource ResourceKey=VerticalGridSplitterStyle}" Grid.Column="1" />
+                        <GridSplitter Style="{StaticResource ResourceKey=VerticalGridSplitterStyle}" Grid.Column="2" />
+                        <GridSplitter Style="{StaticResource ResourceKey=VerticalGridSplitterStyle}" Grid.Column="3" />
+                        <GridSplitter Style="{StaticResource ResourceKey=VerticalGridSplitterStyle}" Grid.Column="4" />
+                        <GridSplitter Style="{StaticResource ResourceKey=VerticalGridSplitterStyle}" Grid.Column="5" />
+
+                        <GridSplitter Style="{StaticResource ResourceKey=HorizontalGridSplitterStyle}" Grid.Row="0"
+                        HorizontalAlignment="Stretch" />
+                        <GridSplitter Style="{StaticResource ResourceKey=HorizontalGridSplitterStyle}" Grid.Row="1"
+                        HorizontalAlignment="Stretch" />
+                        <GridSplitter Style="{StaticResource ResourceKey=HorizontalGridSplitterStyle}" Grid.Row="2"
+                        HorizontalAlignment="Stretch" />
+
+                        <Label Grid.Column="0" Content="Turno" HorizontalAlignment="Center" />
+                        <Label Grid.Column="1" Content="Segunda" HorizontalAlignment="Center" />
+                        <Label Grid.Column="2" Content="Terça" HorizontalAlignment="Center" />
+                        <Label Grid.Column="3" Content="Quarta" HorizontalAlignment="Center" />
+                        <Label Grid.Column="4" Content="Quinta" HorizontalAlignment="Center" />
+                        <Label Grid.Column="5" Content="Sexta" HorizontalAlignment="Center" />
+
+                        <ItemsControl Grid.Row="1" ItemsSource="Manhã" HorizontalAlignment="Center"
+                        VerticalAlignment="Center" />
+                        <ItemsControl Grid.Row="2" ItemsSource="Tarde" HorizontalAlignment="Center"
+                        VerticalAlignment="Center" />
+
+                        <UniformGrid Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="5" Grid.RowSpan="2" Name="GridDays"
+                x:FieldModifier="private" Rows="2" Columns="5">
+                            <RadioButton Style="{StaticResource ResourceKey=AwesomeRadio}" Grid.Column="0" Grid.Row="0"/>
+                            <RadioButton Style="{StaticResource ResourceKey=AwesomeRadio}" Grid.Column="1" Grid.Row="0"/>
+                            <RadioButton Style="{StaticResource ResourceKey=AwesomeRadio}" Grid.Column="2" Grid.Row="0"/>
+                            <RadioButton Style="{StaticResource ResourceKey=AwesomeRadio}" Grid.Column="3" Grid.Row="0"/>
+                            <RadioButton Style="{StaticResource ResourceKey=AwesomeRadio}" Grid.Column="4" Grid.Row="0"/>
+                            <RadioButton Style="{StaticResource ResourceKey=AwesomeRadio}" Grid.Column="0" Grid.Row="1"/>
+                            <RadioButton Style="{StaticResource ResourceKey=AwesomeRadio}" Grid.Column="1" Grid.Row="1"/>
+                            <RadioButton Style="{StaticResource ResourceKey=AwesomeRadio}" Grid.Column="2" Grid.Row="1"/>
+                            <RadioButton Style="{StaticResource ResourceKey=AwesomeRadio}" Grid.Column="3" Grid.Row="1"/>
+                            <RadioButton Style="{StaticResource ResourceKey=AwesomeRadio}" Grid.Column="4" Grid.Row="1"/>
+                        </UniformGrid>
                     </Grid>
-                </Grid>
+
+                </DockPanel>
             </Border>
         </extToolkit:BusyIndicator>
-  </Grid>
+    </Grid>
 </ribbon:RibbonWindow>

@@ -21,8 +21,6 @@ namespace SouthernLapwing
     public partial class MainWindow
     {
         private static readonly object Token = new object();
-        private static readonly Brush ErrorColor = new SolidColorBrush(Colors.Tomato);
-        private static readonly Brush OkColor = new SolidColorBrush(Colors.Cyan);
 
         string Email { get; set; }
         string FullName { get; set; }
@@ -41,18 +39,11 @@ namespace SouthernLapwing
 
         private void ButtonSendClick(object sender, RoutedEventArgs e)
         {
-
-            if (!InputIsValid())
-            {
-                MessageBox.Show("Existem conflitos na tabela", "ERRO", MessageBoxButton.OK, MessageBoxImage.Error);
-                return;
-            }
-
             var teacherChoice = new TeacherChoice
                                     {
                                         Alternatives = GridDays.Children
-                                            .OfType<Label>()
-                                            .Where(l => l.DataContext != null)
+                                            .OfType<RadioButton>()
+                                            .Where(l => l.IsChecked.HasValue)
                                             .Select(l => l.DataContext)
                                             .Cast<Alternative>().ToList(),
 
@@ -81,11 +72,6 @@ namespace SouthernLapwing
             client.SendAsync(mail, Token);
         }
 
-        private bool InputIsValid()
-        {
-            return !GridDays.Children.OfType<Label>().Any(l => l.Background == ErrorColor);
-        }
-
         private void ClientSendCompleted(object sender, AsyncCompletedEventArgs e)
         {
             busyIndicator.IsBusy = false;
@@ -94,25 +80,6 @@ namespace SouthernLapwing
                 MessageBox.Show("Preferências enviadas com sucesso");
             else
                 MessageBox.Show("Erro no envio");
-        }
-
-        private void LabelDataContextChanged(object sender, DependencyPropertyChangedEventArgs e)
-        {
-            var days = GridDays.Children
-                .OfType<Label>()
-                .Where(l => l.DataContext != null)
-                .Select(l => new { Alternative = l.DataContext as Alternative, Label = l })
-                .ToLookup(item => item.Alternative.Priority);
-
-            foreach (var alternative in days.Where(d => d.Count() > 1).SelectMany(group => group.ToList()))
-            {
-                alternative.Label.Background = ErrorColor;
-            }
-
-            foreach (var alternative in days.Where(d => d.Count() == 1).SelectMany(group => group.ToList()))
-            {
-                alternative.Label.Background = OkColor;
-            }
         }
     }
 }

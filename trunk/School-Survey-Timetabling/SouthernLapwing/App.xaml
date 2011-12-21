@@ -3,7 +3,30 @@
              StartupUri="Welcome.xaml">
     <Application.Resources>
         <!-- Resources scoped at the Application level should be defined here. -->
-
+        <Style TargetType="RadioButton" x:Key="AwesomeRadio">
+            <Setter Property="GroupName" Value="Awesome" />
+            <EventSetter Event="Checked" Handler="EventSetter_OnHandler" />
+            <Style.Triggers>
+                <Trigger Property="IsChecked" Value="True">
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate>
+                                <Image Source="Images/Awesome_med.png"/>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                </Trigger>
+                <Trigger Property="IsChecked" Value="False">
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate>
+                                <Image Source="Images/Awesome_med.png" Opacity="0"/>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
         <Style x:Key="LabelDayStyle" TargetType="Label">
             <Setter Property="Margin" Value="1" />
             <Setter Property="HorizontalContentAlignment" Value="Center" />
@@ -13,6 +36,13 @@
             <Setter Property="VerticalAlignment" Value="Stretch" />
             <Setter Property="FontSize" Value="64" />
             <EventSetter Event="MouseUp" Handler="LabelMouseUp" />
+        </Style>
+        <Style x:Key="AwesomeStyle" TargetType="Image">
+            <Setter Property="Margin" Value="1" />
+            <Setter Property="HorizontalAlignment" Value="Stretch" />
+            <Setter Property="VerticalAlignment" Value="Stretch" />
+            <Setter Property="Source" Value="Images/Awesome_med.png" />
+            <Setter Property="Opacity" Value="0" />
         </Style>
         <Style x:Key="VerticalGridSplitterStyle" TargetType="GridSplitter">
             <Setter Property="Grid.Row" Value="0" />
@@ -27,7 +57,7 @@
             <Setter Property="Background" Value="LightSkyBlue" />
             <Setter Property="Grid.ColumnSpan" Value="6" />
             <Setter Property="Height" Value="1" />
-            <Setter Property="VerticalAlignment" Value="Bottom" />
+            <Setter Property="VerticalAlignment" Value="Top" />
             <Setter Property="AllowDrop" Value="False" />
             <Setter Property="HorizontalAlignment" Value="Stretch" />
         </Style>

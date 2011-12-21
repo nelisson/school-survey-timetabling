@@ -1,4 +1,7 @@
-﻿using System.Windows;
+﻿using System.Globalization;
+using System.Windows;
+using System.Windows.Controls;
+using Common.ValidationRules;
 
 namespace SouthernLapwing
 {
@@ -7,14 +10,24 @@ namespace SouthernLapwing
     /// </summary>
     public partial class Welcome
     {
+        public string Email { get; set; }
+        public string FullName { get; set; }    
+
         public Welcome()
         {
+            Email = " ";
+            FullName = " ";
             InitializeComponent();
         }
 
-        private void ButtonClick(object sender, RoutedEventArgs e)
+        private void CommandBindingCanExecute(object sender, System.Windows.Input.CanExecuteRoutedEventArgs e)
         {
-            new MainWindow(TextBoxEmail.Text, TextBoxFullName.Text).Show();
+            e.CanExecute = !Validation.GetHasError(TextBoxFullName) && !Validation.GetHasError(TextBoxEmail);
+        }
+
+        private void CommandBindingExecuted(object sender, System.Windows.Input.ExecutedRoutedEventArgs e)
+        {
+            new MainWindow(Email, FullName).Show();
             Close();
         }
     }
